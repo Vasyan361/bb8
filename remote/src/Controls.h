@@ -19,6 +19,10 @@ class Controls {
         void rightUpButtonClick();
         void rightDownButtonClick();
         void rightRightButtonClick();
+        int getSpeed();
+        int getDirection();
+        int getHappySound();
+        int getSadSound();
     private:
         OneButton buttons[10] {
             // joystick buttons
@@ -51,5 +55,9 @@ class Controls {
             RIGHT_RIGHT_BUTTON,
         } buttonNames;
         Menu* menu;
+        int speed = 0;
+        int direction = 0;
+        int happysound = 0;
+        int sadsound = 0;
 };
         

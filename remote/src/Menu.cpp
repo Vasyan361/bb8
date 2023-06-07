@@ -12,7 +12,7 @@ void Menu::navigate()
 
     switch (Menu::mode)
     {
-        case INFO_SCREEN: Menu::display.infoScreen(); break;
+        case INFO_SCREEN: Menu::display.infoScreen(Menu::speed, Menu::direction); break;
         case MENU_SCREEN: Menu::display.menuScreen(); break;
         case DOME_REVERSE_SCREEN: Menu::display.domeReverseScreen(); break;
         case DOME_CONFIG_SCREEN: Menu::display.domeConfigScreen(); break;
@@ -37,6 +37,9 @@ void Menu::navigate()
         case JOYSTICK_CALIBRATION_STEP_3_SCREEN:
             Menu::display.joystickCalibrationStep3Screen();
             break;
+        case BODY_CONFIG_STEP_1_SCREEN: Menu::display.bodyConfigStep1Screen(); break;
+        case BODY_CONFIG_STEP_2_SCREEN: Menu::display.bodyConfigStep2Screen(); break;
+        case BODY_CONFIG_STEP_3_SCREEN: Menu::display.bodyConfigStep3Screen(); break;
         default: break;
     }
 }
@@ -87,4 +90,14 @@ void Menu::modeAction()
             break;
         default: break;
     }
+}
+
+void Menu::setSpeed(int speed)
+{
+    Menu::speed = speed;
+}
+
+void Menu::setDirection(int direction)
+{
+    Menu::direction = direction;
 }

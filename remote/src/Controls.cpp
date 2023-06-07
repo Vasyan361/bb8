@@ -28,7 +28,9 @@ void Controls::readInput()
 
 void Controls::leftTopJoystickButtonClick()
 {
-     Serial.println("leftTopJoystickButtonClick");
+    Serial.println("leftTopJoystickButtonClick");
+    Controls::direction = !Controls::direction;
+    Controls::menu->setDirection(Controls::direction);
 }
 
 void Controls::rightTopJoystickButtonClick()
@@ -63,6 +65,12 @@ void Controls::leftRightButtonClick()
 void Controls::rightLeftButtonClick()
 {
     Serial.println("rightLeftButtonClick");
+    Controls::speed++;
+    if(Controls::speed > 2) {
+        Controls::speed = 0;
+    }
+
+    Controls::menu->setSpeed(Controls::speed);
 }
 
 void Controls::rightUpButtonClick()
@@ -73,9 +81,31 @@ void Controls::rightUpButtonClick()
 void Controls::rightDownButtonClick()
 {
     Serial.println("rightDownButtonClick");
+    Controls::sadsound = !Controls::sadsound;
 }
 
 void Controls::rightRightButtonClick()
 {
     Serial.println("rightRightButtonClick");
+    Controls::happysound = !Controls::happysound;
+}
+
+int Controls::getSpeed()
+{
+    return Controls::speed;
+}
+
+int Controls::getDirection()
+{
+    return Controls::direction;
+}
+
+int Controls::getHappySound()
+{
+    return Controls::happysound;
+}
+
+int Controls::getSadSound()
+{
+    return Controls::sadsound;
 }

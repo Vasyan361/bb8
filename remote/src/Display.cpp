@@ -47,13 +47,13 @@ void Display::printPointer(int alignment)
     Display::display.print(">");
 }
 
-void Display::infoScreen()
+void Display::infoScreen(int speed, int direction)
 {
     Display::prepareForPrint();
 
     // TODO:: реализовать логику
-    Display::display.println(F("Fwd:     "));
-    Display::display.println(F("Rev:     "));
+    Display::display.print(Display::speedNameMap[speed]); Display::display.println(Display::directionNameMap[direction]);
+    Display::display.println(F(""));
     Display::display.println("Remote: ");
 
     Display::display.display();
@@ -104,7 +104,13 @@ void Display::bodyConfigScreen()
     Display::prepareForPrint();
 
     Display::display.print(F(
-        " Body Config\n"
+        "Body Configuration\n"
+        "=====================\n"
+        "Adjust dome tilt\n"
+        "until the dome is\n"
+        "centered front to back.\n"
+        "\n"
+        "Then press 'Ok"
     ));
 
     Display::display.display();
@@ -175,6 +181,56 @@ void Display::joystickCalibrationStep3Screen()
     Display::display.print(F(
         "Config saved!!\n"
         "=====================\n"
+    ));
+
+    Display::display.display();
+}
+
+void Display::bodyConfigStep1Screen()
+{
+    Display::prepareForPrint();
+
+    Display::display.print(F(
+        "Body Configuration\n"
+        "=====================\n"
+        "Dome tilt offset\n"
+        "and pitch offset\n"
+        "saved to eeprom\n"
+        "\n"
+        "Press 'Ok"
+    ));
+
+    Display::display.display();
+}
+
+void Display::bodyConfigStep2Screen()
+{
+    Display::prepareForPrint();
+
+    Display::display.print(F(
+        "Body Configuration\n"
+        "=====================\n"
+        "Adjust Side to Side\n"
+        "until BB-8\n"
+        "is straight.\n"
+        "\n"
+        "Then press 'Ok"
+    ));
+
+    Display::display.display();
+}
+
+void Display::bodyConfigStep3Screen()
+{
+    Display::prepareForPrint();
+
+    Display::display.print(F(
+        "Body Configuration\n"
+        "=====================\n"
+        "Body Calibration\n"
+        "Complete!\n"
+        "\n"
+        "Press 'Ok"
     ));
 
     Display::display.display();

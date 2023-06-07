@@ -10,7 +10,7 @@ class Display {
     public:
         void init();
         void setPointer(int pointer);
-        void infoScreen();
+        void infoScreen(int speed, int direction);
         void menuScreen();
         void domeReverseScreen();
         void domeConfigScreen();
@@ -19,8 +19,13 @@ class Display {
         void joystickCalibrationStep1Screen(char *joystickName, int valX, int valY);
         void joystickCalibrationStep2Screen(char *joystickName, int minX, int maxX, int minY, int maxY);
         void joystickCalibrationStep3Screen();
+        void bodyConfigStep1Screen();
+        void bodyConfigStep2Screen();
+        void bodyConfigStep3Screen();
     private:
         Adafruit_SSD1306 display;
+        String speedNameMap[3] = {"Slow              ", "Medium            ", "Fast              "};
+        String directionNameMap[2] = {"Fwd", "Rev"};
         int pointer;
         void prepareForPrint();
         void printPointer();

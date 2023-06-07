@@ -13,6 +13,8 @@ class Menu {
         void buttonUpClick();
         void buttonDownClick();
         void buttonBackClick();
+        void setSpeed(int speed);
+        void setDirection(int direction);
     private:
         Display display = Display();
         int mode = 0;
@@ -26,10 +28,13 @@ class Menu {
             JOYSTICK_CONFIG_SCREN,
             JOYSTICK_CALIBRATION_STEP_1_SCREEN,
             JOYSTICK_CALIBRATION_STEP_2_SCREEN,
-            JOYSTICK_CALIBRATION_STEP_3_SCREEN
+            JOYSTICK_CALIBRATION_STEP_3_SCREEN,
+            BODY_CONFIG_STEP_1_SCREEN,
+            BODY_CONFIG_STEP_2_SCREEN,
+            BODY_CONFIG_STEP_3_SCREEN,
         } modes;
-        int maxMode = 8;
-        int maxPointerByMode[9] {
+        int maxMode = 11;
+        int maxPointerByMode[12] {
             0, //INFO_SCREEN
             3, //MENU_SCREEN
             0, //DOME_REVERSE_SCREEN
@@ -38,9 +43,12 @@ class Menu {
             3, //JOYSTICK_CONFIG_SCREN
             0, //JOYSTICK_CALIBRATION_STEP_1_SCREEN
             0, //JOYSTICK_CALIBRATION_STEP_1_SCREEN
-            0  //JOYSTICK_CALIBRATION_STEP_3_SCREEN
+            0, //JOYSTICK_CALIBRATION_STEP_3_SCREEN
+            0, //BODY_CONFIG_STEP_1_SCREEN
+            0, //BODY_CONFIG_STEP_2_SCREEN
+            0, //BODY_CONFIG_STEP_3_SCREEN
         };
-        int nextModeMap[8][4] {
+        int nextModeMap[12][4] {
             {
                 1 //INFO_SCREEN => MENU_SCREEN
             },
@@ -51,13 +59,13 @@ class Menu {
                 5  //MENU_SCREEN => JOYSTICK_CONFIG_SCREN
             },
             {
-                0, // DOME_REVERSE_SCREEN => MENU_SCREEN
+                0, // DOME_REVERSE_SCREEN => INFO_SCREEN
             },
             {
-                0, // DOME_CONFIG_SCREEN => MENU_SCREEN
+                0, // DOME_CONFIG_SCREEN => INFO_SCREEN
             },
             {
-                0, // BODY_CONFIG_SCREEN => MENU_SCREEN
+                9, // BODY_CONFIG_SCREEN => BODY_CONFIG_STEP_1_SCREEN
             },
             {
                 6, // JOYSTICK_CONFIG_SCREN => JOYSTICK_CALIBRATION_STEP_1_SCREEN
@@ -70,6 +78,18 @@ class Menu {
             },
             {
                 8, // JOYSTICK_CALIBRATION_STEP_2_SCREEN => JOYSTICK_CALIBRATION_STEP_3_SCREEN
+            },
+            {
+                0, // JOYSTICK_CALIBRATION_STEP_3_SCREEN => INFO_SCREEN
+            },
+            {
+                10, // BODY_CONFIG_STEP_1_SCREEN => BODY_CONFIG_STEP_2_SCREEN
+            },
+            {
+                11, // BODY_CONFIG_STEP_2_SCREEN => BODY_CONFIG_STEP_3_SCREEN
+            },
+            {
+                0, // BODY_CONFIG_STEP_3_SCREEN => INFO_SCREEN
             }
         };
         int previousModeMap[9] {
@@ -84,5 +104,7 @@ class Menu {
             5  //JOYSTICK_CALIBRATION_STEP_2_SCREEN => MENU_SCREEN
         };
         JoystickControl* joystickControl;
+        int speed = 0;
+        int direction = 0;
         void modeAction();
 };
