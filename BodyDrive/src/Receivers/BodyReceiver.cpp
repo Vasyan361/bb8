@@ -20,7 +20,8 @@ void BodyReceiver::receiveData()
         // Serial.print(bodyData.BottomRightXJoystick); Serial.print(", ");
         // Serial.print(bodyData.speed); Serial.print(", ");
         // Serial.print(bodyData.direction); Serial.print(", ");
-        // Serial.print(bodyData.happySound); Serial.print(", ");
+        // Serial.print(bodyData.soundBip); Serial.print(", ");
+        // Serial.print(bodyData.soundMusic); Serial.print(", ");
         // Serial.print(bodyData.calibrationId); Serial.print(", ");
         // Serial.println(bodyData.motorEnable);
     }
@@ -54,4 +55,34 @@ int16_t BodyReceiver::getBottomLeftXJoystickValue()
 int16_t BodyReceiver::getBottomRightXJoystickValue()
 {
     return bodyData.BottomRightXJoystick;
+}
+
+int16_t BodyReceiver::getSpeedValue()
+{
+    return bodyData.speed;
+}
+
+int16_t BodyReceiver::getDirectionValue()
+{
+    return bodyData.direction;
+}
+
+int16_t BodyReceiver::getSoundBipValue()
+{
+    return bodyData.soundBip;
+}
+
+int16_t BodyReceiver::getSoundMusicValue()
+{
+    return bodyData.soundMusic;
+}
+
+int16_t BodyReceiver::getCalibrationIdValue()
+{
+    return bodyData.calibrationId;
+}
+
+int16_t BodyReceiver::getMotorEnableValue()
+{
+    return bodyData.motorEnable;
 }

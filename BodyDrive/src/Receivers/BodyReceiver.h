@@ -16,23 +16,12 @@ class BodyReceiver
         int16_t getTopRightXJoystickValue();
         int16_t getBottomLeftXJoystickValue();
         int16_t getBottomRightXJoystickValue();
+        int16_t getSpeedValue();
+        int16_t getDirectionValue();
+        int16_t getSoundBipValue();
+        int16_t getSoundMusicValue();
+        int16_t getCalibrationIdValue();
+        int16_t getMotorEnableValue();
     private:
-        // typedef struct BodyReceiveData {
-        //     int16_t TopLeftXJoystick = 512;
-        //     int16_t TopLeftYJoystick = 512;
-
-        //     int16_t TopRightXJoystick = 512;
-        //     int16_t TopRightYJoystick = 512;
-
-        //     int16_t  = 512;
-        //     int16_t  = 512;
-
-        //     int16_t speed = 0;
-        //     int16_t direction = 0;
-        //     int16_t happySound = 0;
-        //     int16_t sadSound = 0;
-        //     int16_t calibrationId = 0;
-        //     int16_t motorEnable = 0;
-        // } BodyReceiveData;
         EasyTransfer ReceiveBody;
 };

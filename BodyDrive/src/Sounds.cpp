@@ -1,7 +1,9 @@
 #include "Sounds.h"
 
-void Sounds::init()
+void Sounds::init(BodyReceiver* bodyReceiver)
 {
+    Sounds::bodyReceiver = bodyReceiver;
+
     Serial3.begin(9600);
 
     if (!Sounds::myDFPlayer.begin(Serial3)) {  //Use softwareSerial to communicate with mp3.
@@ -16,9 +18,35 @@ void Sounds::init()
 
     myDFPlayer.setTimeOut(500);
     myDFPlayer.volume(30);  //Set volume value. From 0 to 30
-    myDFPlayer.playFolder(1, 1);
+    
 }
 
 void Sounds::playSound()
 {
+    Sounds::playSoundBip();
+    Sounds::playSoundMusic();
+}
+
+void Sounds::playSoundBip()
+{
+    if (Sounds::lastSoundBip != Sounds::bodyReceiver->getSoundBipValue())
+    {
+        Sounds::lastSoundBip = Sounds::bodyReceiver->getSoundBipValue();
+
+        myDFPlayer.playFolder(1, random(1, 49));
+    }
+}
+
+void Sounds::playSoundMusic()
+{
+    if (Sounds::lastSoundMusic != Sounds::bodyReceiver->getSoundMusicValue())
+    {
+        Sounds::lastSoundMusic = Sounds::bodyReceiver->getSoundMusicValue();
+
+        if (2 == Sounds::bodyReceiver->getSoundMusicValue()) {
+            myDFPlayer.playFolder(2, 42);
+        }
+
+        myDFPlayer.playFolder(2, random(1, 5));
+    }
 }

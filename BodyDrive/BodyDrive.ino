@@ -22,15 +22,14 @@ void setup() {
 
     bodyReceiver.init();
     imuReceiver.init();
-    // sounds.init();
+    sounds.init(&bodyReceiver);
     
     
-    // Serial.println("Ready");
     pinMode(29, OUTPUT);
     pinMode(33, OUTPUT);
 
-    digitalWrite(29, HIGH);
-    digitalWrite(33, HIGH);
+    // digitalWrite(29, HIGH);
+    // digitalWrite(33, HIGH);
 
 
     // leftServo.attach(4);
@@ -42,6 +41,8 @@ void setup() {
 void loop() {
     bodyReceiver.receiveData();
     imuReceiver.receiveData();
+
+    sounds.playSound();
 
     // domeMovement.moveServo(bodyData.TopLeftXJoystick, bodyData.TopLeftYJoystick);
 
