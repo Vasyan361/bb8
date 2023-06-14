@@ -6,14 +6,9 @@
 // #include "src/DomeMovement.h"
 #include "src/BodyReceiver.h"
 #include "src/ImuReceiver.h"
-#include "src/MainDriveMotor.h"
-#include "src/SideToSideMotor.h"
  
 BodyReceiver bodyReceiver;
 ImuReceiver imuReceiver;
-
-MainDriveMotor mainDriveMotor;
-SideToSideMotor sideToSideMotor;
 
 // struct SEND_DATA_STRUCTURE{
 //   //put your variable definitions here for the data you want to send
@@ -43,8 +38,6 @@ void setup() {
 
     bodyReceiver.init();
     imuReceiver.init();
-    mainDriveMotor.init();
-    sideToSideMotor.init();
     // Serial3.begin(9600);
     
     
@@ -83,8 +76,6 @@ void setup() {
 void loop() {
     bodyReceiver.receiveData();
     imuReceiver.receiveData();
-    mainDriveMotor.run(bodyReceiver.getTopRightYJoystickValue());
-    sideToSideMotor.run(bodyReceiver.getTopRightXJoystickValue());
 
     // domeMovement.moveServo(bodyData.TopLeftXJoystick, bodyData.TopLeftYJoystick);
 

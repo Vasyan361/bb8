@@ -26,6 +26,16 @@ void BodyReceiver::receiveData()
     }
 }
 
+int16_t BodyReceiver::getTopLeftXJoystickValue()
+{
+    return bodyData.TopLeftXJoystick;
+}
+
+int16_t BodyReceiver::getTopLeftYJoystickValue()
+{
+    return bodyData.TopLeftYJoystick;
+}
+
 int16_t BodyReceiver::getTopRightXJoystickValue()
 {
     return bodyData.TopRightXJoystick;
@@ -34,4 +44,14 @@ int16_t BodyReceiver::getTopRightXJoystickValue()
 int16_t BodyReceiver::getTopRightYJoystickValue()
 {
     return bodyData.TopRightYJoystick;
+}
+
+int16_t BodyReceiver::getBottomLeftXJoystickValue()
+{
+    return bodyData.BottomLeftXJoystick;
+}
+
+int16_t BodyReceiver::getBottomRightXJoystickValue()
+{
+    return bodyData.BottomRightXJoystick;
 }

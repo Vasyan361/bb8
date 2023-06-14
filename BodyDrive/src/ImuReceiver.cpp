@@ -18,17 +18,17 @@ void ImuReceiver::receiveData()
     }
 }
 
-float ImuReceiver::getImuLoop()
+float ImuReceiver::getImuLoopValue()
 {
     return imuData.imuLoop;
 }
 
-float ImuReceiver::getPitch()
+float ImuReceiver::getPitchValue()
 {
     return imuData.pitch;
 }
 
-float ImuReceiver::getRoll()
+float ImuReceiver::getRollValue()
 {
     return imuData.roll;
 }

@@ -10,8 +10,12 @@ class BodyReceiver
     public:
         void init();
         void receiveData();
+        int16_t getTopLeftXJoystickValue();
+        int16_t getTopLeftYJoystickValue();
         int16_t getTopRightYJoystickValue();
         int16_t getTopRightXJoystickValue();
+        int16_t getBottomLeftXJoystickValue();
+        int16_t getBottomRightXJoystickValue();
     private:
         // typedef struct BodyReceiveData {
         //     int16_t TopLeftXJoystick = 512;
@@ -20,8 +24,8 @@ class BodyReceiver
         //     int16_t TopRightXJoystick = 512;
         //     int16_t TopRightYJoystick = 512;
 
-        //     int16_t BottomLeftXJoystick = 512;
-        //     int16_t BottomRightXJoystick = 512;
+        //     int16_t  = 512;
+        //     int16_t  = 512;
 
         //     int16_t speed = 0;
         //     int16_t direction = 0;

@@ -10,9 +10,9 @@ class ImuReceiver
     public:
         void init();
         void receiveData();
-        float getImuLoop();
-        float getPitch();
-        float getRoll();
+        float getImuLoopValue();
+        float getPitchValue();
+        float getRollValue();
     private:
         EasyTransfer ReceiveImu;
 };
