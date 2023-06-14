@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Config.h"
+#include "../../Config.h"
 #include <Arduino.h>
 #include <EasyTransfer.h>
 #include "ImuReceiveStruct.h"
