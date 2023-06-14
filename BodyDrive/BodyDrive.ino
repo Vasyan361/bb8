@@ -1,29 +1,15 @@
 #include <Arduino.h>
 // 
-// #include <GyverMotor2.h>
 // #include <DFRobotDFPlayerMini.h>
 // #include <EncButton2.h>
 // #include "src/DomeMovement.h"
-#include "src/BodyReceiver.h"
-#include "src/ImuReceiver.h"
+#include "src/Receivers/BodyReceiver.h"
+#include "src/Receivers/ImuReceiver.h"
  
 BodyReceiver bodyReceiver;
 ImuReceiver imuReceiver;
 
-// struct SEND_DATA_STRUCTURE{
-//   //put your variable definitions here for the data you want to send
-//   //THIS MUST BE EXACTLY THE SAME ON THE OTHER ARDUINO
-//   int16_t blinks;
-//   int16_t pause;
-// };
 
-// //give a name to the group of data
-// SEND_DATA_STRUCTURE mydata;
-
-// GMotor2<DRIVER2WIRE> sideToSideMotor(6, 7);
-// GMotor2<DRIVER2WIRE> flywheelSpinMotor(8, 9);
-// GMotor2<DRIVER2WIRE> domeMotor(10, 11);
-// GMotor2<DRIVER2WIRE> mainDriveMotor(12, 13);
 
 // DFRobotDFPlayerMini myDFPlayer;
 
@@ -48,10 +34,6 @@ void setup() {
     digitalWrite(29, HIGH);
     digitalWrite(33, HIGH);
 
-    // sideToSideMotor.setSpeed(130);
-    // flywheelSpinMotor.setSpeed(130);
-    // domeMotor.setSpeed(130);
-    // mainDriveMotor.setSpeed(130);
 
     // if (!myDFPlayer.begin(Serial3)) {  //Use softwareSerial to communicate with mp3.
     //     Serial.println(F("Unable to begin:"));
