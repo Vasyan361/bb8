@@ -11,8 +11,8 @@ struct BodyTransmitData
 
     int16_t speed = 0;
     int16_t direction = 0;
-    int16_t happySound = 0;
-    int16_t sadSound = 0;
+    int16_t soundBip = 0;
+    int16_t soundMusic = 0;
     int16_t calibrationId = 0;
     int16_t motorEnable = 0;
 };

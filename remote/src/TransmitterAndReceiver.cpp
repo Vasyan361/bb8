@@ -52,17 +52,17 @@ void TransmitterAndReceiver::sendData()
 
     bodyData.speed = TransmitterAndReceiver::buttonControl->getSpeed();
     bodyData.direction = TransmitterAndReceiver::buttonControl->getDirection();
-    bodyData.happySound = TransmitterAndReceiver::buttonControl->getHappySound();
-    bodyData.sadSound = TransmitterAndReceiver::buttonControl->getSadSound();
+    bodyData.soundBip = TransmitterAndReceiver::buttonControl->getSoundBip();
+    bodyData.soundMusic = TransmitterAndReceiver::buttonControl->getSoundMusic();
     bodyData.motorEnable = TransmitterAndReceiver::buttonControl->getMotorEnable();
     bodyData.calibrationId = TransmitterAndReceiver::menu->getCalibrationId();
 
     esp_err_t result = esp_now_send(TransmitterAndReceiver::bodyAddress, (uint8_t *) &bodyData, sizeof(bodyData));
-   
-    if (result == ESP_OK) {
-        Serial.println("Sent with success");
-    }
-    else {
-        Serial.println("Error sending the data");
-    }
+
+    // if (result == ESP_OK) {
+    //     Serial.println("Sent with success");
+    // }
+    // else {
+    //     Serial.println("Error sending the data");
+    // }
 }

@@ -19,10 +19,11 @@ class Controls {
         void rightUpButtonClick();
         void rightDownButtonClick();
         void rightRightButtonClick();
+        void rightDownButtonDoubleClick();
         int getSpeed();
         int getDirection();
-        int getHappySound();
-        int getSadSound();
+        int getSoundBip();
+        int getSoundMusic();
         int getMotorEnable();
     private:
         OneButton buttons[10] {
@@ -58,7 +59,7 @@ class Controls {
         Menu* menu;
         int speed = 0;
         int direction = 0;
-        int happysound = 0;
-        int sadsound = 0;
+        int soundBip = 0;
+        int soundMusic = 0;
 };
         

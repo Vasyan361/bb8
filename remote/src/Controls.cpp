@@ -16,6 +16,7 @@ void Controls::init(Menu* menu)
     Controls::buttons[RIGHT_LEFT_BUTTON].attachClick([](void *scope) { ((Controls *) scope)->rightLeftButtonClick();}, this);
     Controls::buttons[RIGHT_UP_BUTTON].attachClick([](void *scope) { ((Controls *) scope)->rightUpButtonClick();}, this);
     Controls::buttons[RIGHT_DOWN_BUTTON].attachClick([](void *scope) { ((Controls *) scope)->rightDownButtonClick();}, this);
+    Controls::buttons[RIGHT_DOWN_BUTTON].attachDoubleClick([](void *scope) { ((Controls *) scope)->rightDownButtonDoubleClick();}, this);
     Controls::buttons[RIGHT_RIGHT_BUTTON].attachClick([](void *scope) { ((Controls *) scope)->rightRightButtonClick();}, this);
 
     pinMode(MOTOR_ENABLE_PIN, INPUT_PULLUP);
@@ -83,13 +84,21 @@ void Controls::rightUpButtonClick()
 void Controls::rightDownButtonClick()
 {
     Serial.println("rightDownButtonClick");
-    Controls::sadsound = !Controls::sadsound;
+    Controls::soundMusic = !Controls::soundMusic;
 }
+
+void Controls::rightDownButtonDoubleClick()
+{
+    Serial.println("rightDownButtonDoubleClick");
+
+    Controls::soundMusic = 2;
+}
+
 
 void Controls::rightRightButtonClick()
 {
     Serial.println("rightRightButtonClick");
-    Controls::happysound = !Controls::happysound;
+    Controls::soundBip = !Controls::soundBip;
 }
 
 int Controls::getSpeed()
@@ -102,14 +111,14 @@ int Controls::getDirection()
     return Controls::direction;
 }
 
-int Controls::getHappySound()
+int Controls::getSoundBip()
 {
-    return Controls::happysound;
+    return Controls::soundBip;
 }
 
-int Controls::getSadSound()
+int Controls::getSoundMusic()
 {
-    return Controls::sadsound;
+    return Controls::soundMusic;
 }
 
 int Controls::getMotorEnable()
