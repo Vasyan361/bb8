@@ -37,7 +37,8 @@ void OnDataReceive(const uint8_t * mac, const uint8_t *incomingData, int len) {
     // Serial.print(bodyData.BottomRightXJoystick); Serial.print(", ");
     // Serial.print(bodyData.speed); Serial.print(", ");
     // Serial.print(bodyData.direction); Serial.print(", ");
-    // Serial.print(bodyData.happySound); Serial.print(", ");
+    // Serial.print(bodyData.soundBip); Serial.print(", ");
+    // Serial.print(bodyData.soundMusic); Serial.print(", ");
     // Serial.print(bodyData.calibrationId); Serial.print(", ");
     // Serial.println(bodyData.motorEnable);
 }
