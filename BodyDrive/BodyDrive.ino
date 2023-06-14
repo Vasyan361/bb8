@@ -5,10 +5,13 @@
 // #include <EncButton2.h>
 // #include "src/DomeMovement.h"
 #include "src/BodyReceiver.h"
+#include "src/ImuReceiver.h"
 #include "src/MainDriveMotor.h"
 #include "src/SideToSideMotor.h"
  
 BodyReceiver bodyReceiver;
+ImuReceiver imuReceiver;
+
 MainDriveMotor mainDriveMotor;
 SideToSideMotor sideToSideMotor;
 
@@ -21,18 +24,6 @@ SideToSideMotor sideToSideMotor;
 
 // //give a name to the group of data
 // SEND_DATA_STRUCTURE mydata;
-
-// EasyTransfer ET;
-
-// typedef struct ImuReceiveData{
-//     float imuLoop;
-//     float pitch;
-//     float roll;
-//   } ImuReceiveData;
-
-// ImuReceiveData ImuData;
-
-// EasyTransfer ReceiveImu;
 
 // GMotor2<DRIVER2WIRE> sideToSideMotor(6, 7);
 // GMotor2<DRIVER2WIRE> flywheelSpinMotor(8, 9);
@@ -51,14 +42,12 @@ void setup() {
     Serial.begin(115200);
 
     bodyReceiver.init();
+    imuReceiver.init();
     mainDriveMotor.init();
     sideToSideMotor.init();
-    // Serial2.begin(115200);
     // Serial3.begin(9600);
     
     
-    // ReceiveImu.begin(details(ImuData), &Serial2);
-
     // Serial.println("Ready");
     pinMode(29, OUTPUT);
     pinMode(33, OUTPUT);
@@ -81,11 +70,6 @@ void setup() {
     // }
     // Serial.println(F("DFPlayer Mini online."));
 
-  //start the library, pass in the data details and the name of the serial port. Can be Serial, Serial1, Serial2, etc. 
-    // ET.begin(details(mydata), &Serial2);
-
-
-    
     // myDFPlayer.setTimeOut(500);
     // myDFPlayer.volume(30);  //Set volume value. From 0 to 30
     // myDFPlayer.playFolder(1, 1);
@@ -98,26 +82,9 @@ void setup() {
 
 void loop() {
     bodyReceiver.receiveData();
+    imuReceiver.receiveData();
     mainDriveMotor.run(bodyReceiver.getTopRightYJoystickValue());
     sideToSideMotor.run(bodyReceiver.getTopRightXJoystickValue());
-
-    // if(ReceiveImu.receiveData()){
-        // Serial.print("ImuData.imuLoop"); Serial.println(ImuData.imuLoop);
-        // Serial.print("ImuData.pitch"); Serial.println(ImuData.pitch);
-        // Serial.print("ImuData.roll"); Serial.println(ImuData.roll);
-
-        // Serial.println("");
-    // }
-
-    // if(ET.receiveData()){
-        // Serial.print("ImuData.imuLoop"); Serial.println(ImuData.imuLoop);
-        // Serial.print("ImuData.pitch"); Serial.println(ImuData.pitch);
-        // Serial.print("ImuData.roll"); Serial.println(ImuData.roll);
-        // Serial.print("ImuData.blinks"); Serial.println(mydata.blinks);
-        // Serial.print("ImuData.pause"); Serial.println(mydata.pause);
-
-        // Serial.println("");
-    // }
 
     // domeMovement.moveServo(bodyData.TopLeftXJoystick, bodyData.TopLeftYJoystick);
 
