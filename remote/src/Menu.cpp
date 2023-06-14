@@ -88,6 +88,8 @@ void Menu::modeAction()
             Menu::joystickControl->updateSelectedJoystickMinMax();
             Menu::joystickControl->saveJoystickConfig();
             break;
+        case BODY_CONFIG_STEP_1_SCREEN: Menu::calibrationId = 3; break;
+        case BODY_CONFIG_STEP_3_SCREEN: Menu::calibrationId = 4; break;
         default: break;
     }
 }
@@ -100,4 +102,9 @@ void Menu::setSpeed(int speed)
 void Menu::setDirection(int direction)
 {
     Menu::direction = direction;
+}
+
+int Menu::getCalibrationId()
+{
+    return Menu::calibrationId;
 }

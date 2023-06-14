@@ -23,6 +23,7 @@ class Controls {
         int getDirection();
         int getHappySound();
         int getSadSound();
+        int getMotorEnable();
     private:
         OneButton buttons[10] {
             // joystick buttons

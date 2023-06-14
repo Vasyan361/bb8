@@ -15,6 +15,7 @@ class Menu {
         void buttonBackClick();
         void setSpeed(int speed);
         void setDirection(int direction);
+        int getCalibrationId();
     private:
         Display display = Display();
         int mode = 0;
@@ -106,5 +107,6 @@ class Menu {
         JoystickControl* joystickControl;
         int speed = 0;
         int direction = 0;
+        int calibrationId = 0;
         void modeAction();
 };

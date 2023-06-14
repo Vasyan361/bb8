@@ -17,6 +17,8 @@ void Controls::init(Menu* menu)
     Controls::buttons[RIGHT_UP_BUTTON].attachClick([](void *scope) { ((Controls *) scope)->rightUpButtonClick();}, this);
     Controls::buttons[RIGHT_DOWN_BUTTON].attachClick([](void *scope) { ((Controls *) scope)->rightDownButtonClick();}, this);
     Controls::buttons[RIGHT_RIGHT_BUTTON].attachClick([](void *scope) { ((Controls *) scope)->rightRightButtonClick();}, this);
+
+    pinMode(MOTOR_ENABLE_PIN, INPUT_PULLUP);
 }
 
 void Controls::readInput()
@@ -108,4 +110,9 @@ int Controls::getHappySound()
 int Controls::getSadSound()
 {
     return Controls::sadsound;
+}
+
+int Controls::getMotorEnable()
+{
+    return digitalRead(MOTOR_ENABLE_PIN);
 }

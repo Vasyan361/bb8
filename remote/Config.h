@@ -28,6 +28,8 @@
 #define RIGHT_DOWN_BUTTON_PIN 0
 #define RIGHT_RIGHT_BUTTON_PIN 2
 
+#define MOTOR_ENABLE_PIN 15
+
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 

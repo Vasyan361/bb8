@@ -36,9 +36,26 @@ void TransmitterAndReceiver::setJoystickControl(JoystickControl* joystickControl
     TransmitterAndReceiver::joystickControl = joystickControl;
 }
 
+void TransmitterAndReceiver::setButtonControl(Controls* buttonControl)
+{
+    TransmitterAndReceiver::buttonControl = buttonControl;
+}
+
+void TransmitterAndReceiver::setMenu(Menu* menu)
+{
+    TransmitterAndReceiver::menu = menu;
+}
+
 void TransmitterAndReceiver::sendData()
 {
     BodyTransmitData bodyData = TransmitterAndReceiver::joystickControl->getJoystickControlTransmitData();
+
+    bodyData.speed = TransmitterAndReceiver::buttonControl->getSpeed();
+    bodyData.direction = TransmitterAndReceiver::buttonControl->getDirection();
+    bodyData.happySound = TransmitterAndReceiver::buttonControl->getHappySound();
+    bodyData.sadSound = TransmitterAndReceiver::buttonControl->getSadSound();
+    bodyData.motorEnable = TransmitterAndReceiver::buttonControl->getMotorEnable();
+    bodyData.calibrationId = TransmitterAndReceiver::menu->getCalibrationId();
 
     esp_err_t result = esp_now_send(TransmitterAndReceiver::bodyAddress, (uint8_t *) &bodyData, sizeof(bodyData));
    

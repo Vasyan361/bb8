@@ -25,6 +25,9 @@ void setup()
     transmitterAndReceiver.setJoystickControl(&joystickControl);
     menu.init(&joystickControl);
     controls.init(&menu);
+    transmitterAndReceiver.setMenu(&menu);
+    transmitterAndReceiver.setButtonControl(&controls);
+
     
     Serial.println("Ready");
 }
@@ -35,7 +38,7 @@ void loop()
         timer = millis();
         controls.readInput();
         menu.navigate();
-        // transmitterAndReceiver.sendData();
+        transmitterAndReceiver.sendData();
 
         // Serial.print("TopLeftXJoystick: "); Serial.println(joystickControl.getJoystickControlTransmitData().TopLeftXJoystick);
         // Serial.print("TopLeftYJoystick: "); Serial.println(joystickControl.getJoystickControlTransmitData().TopLeftYJoystick);
