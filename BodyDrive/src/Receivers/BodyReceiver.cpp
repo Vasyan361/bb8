@@ -12,6 +12,8 @@ void BodyReceiver::init()
 void BodyReceiver::receiveData()
 {
     if(BodyReceiver::ReceiveBody.receiveData()){
+        BodyReceiver::active = true;
+        BodyReceiver::lastReceiveDataTime = millis();
         // Serial.print(bodyData.TopLeftXJoystick); Serial.print(", ");
         // Serial.print(bodyData.TopLeftYJoystick); Serial.print(", ");
         // Serial.print(bodyData.TopRightXJoystick); Serial.print(", ");
@@ -25,6 +27,13 @@ void BodyReceiver::receiveData()
         // Serial.print(bodyData.calibrationId); Serial.print(", ");
         // Serial.println(bodyData.motorEnable);
     }
+
+    BodyReceiver::checkLastReceiveData();
+}
+
+bool BodyReceiver::isActive()
+{
+    return BodyReceiver::active;
 }
 
 int16_t BodyReceiver::getTopLeftXJoystickValue()
@@ -85,4 +94,12 @@ int16_t BodyReceiver::getCalibrationIdValue()
 int16_t BodyReceiver::getMotorEnableValue()
 {
     return bodyData.motorEnable;
+}
+
+void BodyReceiver::checkLastReceiveData()
+{
+    if (BodyReceiver::lastReceiveDataTime - millis() > 15000)
+    {
+        BodyReceiver::active = false;
+    }
 }

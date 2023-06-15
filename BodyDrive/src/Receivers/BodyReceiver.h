@@ -10,6 +10,7 @@ class BodyReceiver
     public:
         void init();
         void receiveData();
+        bool isActive();
         int16_t getTopLeftXJoystickValue();
         int16_t getTopLeftYJoystickValue();
         int16_t getTopRightYJoystickValue();
@@ -24,4 +25,7 @@ class BodyReceiver
         int16_t getMotorEnableValue();
     private:
         EasyTransfer ReceiveBody;
+        bool active = false;
+        uint32_t lastReceiveDataTime;
+        void checkLastReceiveData();
 };
