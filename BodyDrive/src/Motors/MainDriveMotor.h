@@ -10,5 +10,5 @@ class MainDriveMotor
         void init();
         void run(int val);
     private:
-        GMotor* motor;
+        GMotor motor = GMotor(DRIVER2WIRE, MAIN_DRIVE_MOTOR_R_PWM_PIN, MAIN_DRIVE_MOTOR_L_PWM_PIN);
 };

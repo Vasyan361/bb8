@@ -44,7 +44,7 @@ float ImuReceiver::getRollValue()
 
 void ImuReceiver::checkLastReceiveData()
 {
-    if (ImuReceiver::lastReceiveDataTime - millis() > 15000)
+    if (millis() - ImuReceiver::lastReceiveDataTime > 15000)
     {
         ImuReceiver::active = false;
     }

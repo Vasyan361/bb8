@@ -22,10 +22,10 @@ class BodyReceiver
         int16_t getSoundBipValue();
         int16_t getSoundMusicValue();
         int16_t getCalibrationIdValue();
-        int16_t getMotorEnableValue();
+        int16_t isEnabledMotor();
     private:
         EasyTransfer ReceiveBody;
-        bool active = false;
+        bool active;
         uint32_t lastReceiveDataTime;
         void checkLastReceiveData();
 };

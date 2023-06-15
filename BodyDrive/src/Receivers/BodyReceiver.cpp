@@ -7,6 +7,8 @@ void BodyReceiver::init()
     Serial1.begin(57600);
 
     BodyReceiver::ReceiveBody.begin(details(bodyData), &Serial1);
+
+    BodyReceiver::active = false;
 }
 
 void BodyReceiver::receiveData()
@@ -91,14 +93,14 @@ int16_t BodyReceiver::getCalibrationIdValue()
     return bodyData.calibrationId;
 }
 
-int16_t BodyReceiver::getMotorEnableValue()
+int16_t BodyReceiver::isEnabledMotor()
 {
     return bodyData.motorEnable;
 }
 
 void BodyReceiver::checkLastReceiveData()
 {
-    if (BodyReceiver::lastReceiveDataTime - millis() > 15000)
+    if (millis() - BodyReceiver::lastReceiveDataTime > 15000)
     {
         BodyReceiver::active = false;
     }

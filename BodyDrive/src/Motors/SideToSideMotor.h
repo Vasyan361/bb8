@@ -10,5 +10,5 @@ class SideToSideMotor
         void init();
         void run(int val);
     private:
-        GMotor* motor;
+        GMotor motor = GMotor(DRIVER2WIRE, SIDE_TO_SIDE_MOTOR_R_PWM_PIN, SIDE_TO_SIDE_MOTOR_L_PWM_PIN);
 };
