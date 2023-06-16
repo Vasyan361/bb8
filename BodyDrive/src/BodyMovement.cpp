@@ -15,6 +15,8 @@ void BodyMovement::init(BodyReceiver* bodyReceiver, ImuReceiver* imuReveiver)
 
 void BodyMovement::run()
 {
+    BodyMovement::setSpeed();
+    
     if (BodyMovement::bodyReceiver->isActive() && BodyMovement::imuReveiver->isActive() && BodyMovement::bodyReceiver->isEnabledMotor())
     {
         BodyMovement::enableMotor();
@@ -36,10 +38,19 @@ void BodyMovement::enableMotor()
 
 void BodyMovement::shutdownMotor()
 {
-    // BodyMovement::sideToSideMotor.run(512);
-    // BodyMovement::flywheelSpinMotor.run(512);
-    // BodyMovement::mainDriveMotor.run(512);
-    
     digitalWrite(FLYWHEEL_SPIN_AND_MAIN_DRIVE_ENABLE_PIN, LOW);
     digitalWrite(SIDE_TO_SIDE_ENABLE_PIN, LOW);
+}
+
+void BodyMovement::setSpeed()
+{
+    if (BodyMovement::lastSpeedValue != BodyMovement::bodyReceiver->getSpeedValue())
+    {
+        BodyMovement::lastSpeedValue = BodyMovement::bodyReceiver->getSpeedValue();
+
+        BodyMovement::sideToSideMotor.setSpeed(BodyMovement::speedMap[BodyMovement::bodyReceiver->getSpeedValue()]);
+        BodyMovement::mainDriveMotor.setSpeed(BodyMovement::speedMap[BodyMovement::bodyReceiver->getSpeedValue()]);
+        BodyMovement::flywheelSpinMotor.setSpeed(BodyMovement::speedMap[BodyMovement::bodyReceiver->getSpeedValue()]);
+    }
+    
 }

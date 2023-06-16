@@ -19,6 +19,9 @@ class BodyMovement
         SideToSideMotor sideToSideMotor = SideToSideMotor();
         FlywheelSpinMotor flywheelSpinMotor = FlywheelSpinMotor();
         MainDriveMotor mainDriveMotor = MainDriveMotor();
+        int lastSpeedValue = 0;
+        int speedMap[3] = {124, 186, 255};
         void enableMotor();
         void shutdownMotor();
+        void setSpeed();
 };

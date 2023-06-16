@@ -7,5 +7,10 @@ void DomeMotor::init()
 
 void DomeMotor::run(int val)
 {
-    DomeMotor::motor.setSpeed(map(val, 0, 1024, -255, 255));
+    DomeMotor::motor.setSpeed(constrain(map(val, 0, 1024, -DomeMotor::speed, DomeMotor::speed), -DomeMotor::speed, DomeMotor::speed));
+}
+
+void DomeMotor::setSpeed(int speed)
+{
+    DomeMotor::speed = speed;
 }

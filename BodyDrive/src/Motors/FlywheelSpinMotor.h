@@ -9,7 +9,9 @@ class FlywheelSpinMotor
     public:
         void init();
         void run(int val);
+        void setSpeed(int speed);
     private:
         GMotor motor = GMotor(DRIVER2WIRE, FLYWHEEL_SPIN_MOTOR_R_PWM_PIN, FLYWHEEL_SPIN_MOTOR_L_PWM_PIN);
+        int speed = 124;
 };
 
