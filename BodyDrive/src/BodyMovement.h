@@ -4,6 +4,8 @@
 #include "../Config.h"
 #include "Receivers/BodyReceiver.h"
 #include "Receivers/ImuReceiver.h"
+#include "Inputs.h"
+#include "Calibration.h"
 #include "Motors/SideToSideMotor.h"
 #include "Motors/FlywheelSpinMotor.h"
 #include "Motors/MainDriveMotor.h"
@@ -11,11 +13,13 @@
 class BodyMovement
 {
     public:
-        void init(BodyReceiver* bodyReceiver, ImuReceiver* imuReveiver);
+        void init(BodyReceiver* bodyReceiver, ImuReceiver* imuReveiver, Inputs* inputs, Calibration* calibration);
         void run();
     private:
         BodyReceiver* bodyReceiver;
         ImuReceiver* imuReveiver;
+        Inputs* inputs;
+        Calibration* calibration;
         SideToSideMotor sideToSideMotor = SideToSideMotor();
         FlywheelSpinMotor flywheelSpinMotor = FlywheelSpinMotor();
         MainDriveMotor mainDriveMotor = MainDriveMotor();

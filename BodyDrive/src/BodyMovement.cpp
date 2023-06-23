@@ -1,9 +1,11 @@
 #include "BodyMovement.h"
 
-void BodyMovement::init(BodyReceiver* bodyReceiver, ImuReceiver* imuReveiver)
+void BodyMovement::init(BodyReceiver* bodyReceiver, ImuReceiver* imuReveiver, Inputs* inputs, Calibration* calibration)
 {
     BodyMovement::bodyReceiver = bodyReceiver;
     BodyMovement::imuReveiver = imuReveiver;
+    BodyMovement::inputs = inputs;
+    BodyMovement::calibration = calibration;
 
     pinMode(FLYWHEEL_SPIN_AND_MAIN_DRIVE_ENABLE_PIN, OUTPUT);
     pinMode(SIDE_TO_SIDE_ENABLE_PIN, OUTPUT);
@@ -21,7 +23,14 @@ void BodyMovement::run()
     {
         BodyMovement::enableMotor();
 
-        BodyMovement::sideToSideMotor.run(BodyMovement::bodyReceiver->getTopRightXJoystickValue());
+        BodyMovement::sideToSideMotor.setJoystickValue(BodyMovement::bodyReceiver->getTopRightXJoystickValue(), BodyMovement::bodyReceiver->getDirectionValue());
+        BodyMovement::sideToSideMotor.setRoll(BodyMovement::imuReveiver->getRollValue());
+        BodyMovement::sideToSideMotor.setRollOffset(BodyMovement::calibration->getRollOffset());
+        BodyMovement::sideToSideMotor.setSideTosidePot(BodyMovement::inputs->getSideToSiePotValue());
+        BodyMovement::sideToSideMotor.setSideTosidePotOffset(BodyMovement::calibration->getSideToSidePotOffset());
+        BodyMovement::sideToSideMotor.run();
+
+
         BodyMovement::mainDriveMotor.run(BodyMovement::bodyReceiver->getTopRightYJoystickValue());
         BodyMovement::flywheelSpinMotor.run(BodyMovement::bodyReceiver->getBottomRightXJoystickValue());
     } else {
@@ -48,7 +57,6 @@ void BodyMovement::setSpeed()
     {
         BodyMovement::lastSpeedValue = BodyMovement::bodyReceiver->getSpeedValue();
 
-        BodyMovement::sideToSideMotor.setSpeed(BodyMovement::speedMap[BodyMovement::bodyReceiver->getSpeedValue()]);
         BodyMovement::mainDriveMotor.setSpeed(BodyMovement::speedMap[BodyMovement::bodyReceiver->getSpeedValue()]);
         BodyMovement::flywheelSpinMotor.setSpeed(BodyMovement::speedMap[BodyMovement::bodyReceiver->getSpeedValue()]);
     }

@@ -5,17 +5,23 @@
 // #include "src/DomeMovement.h"
 #include "src/Receivers/BodyReceiver.h"
 #include "src/Receivers/ImuReceiver.h"
+#include "src/Inputs.h"
 #include "src/BodyMovement.h"
+#include "src/Calibration.h"
 #include "src/Sounds.h"
  
 BodyReceiver bodyReceiver;
 ImuReceiver imuReceiver;
+Inputs inputs;
 
 BodyMovement bodyMovement;
 // DomeMovement domeMovement;
 
+Calibration calibration;
+
 Sounds sounds;
 
+uint32_t timer;
 
 // EncButton2<EB_ENC> enc(INPUT, 20, 21);
 
@@ -25,7 +31,11 @@ void setup() {
     bodyReceiver.init();
     imuReceiver.init();
 
-    bodyMovement.init(&bodyReceiver, &imuReceiver);
+    calibration.init(&bodyReceiver, &imuReceiver, &inputs);
+
+    bodyMovement.init(&bodyReceiver, &imuReceiver, &inputs, &calibration);
+    
+    
 
     sounds.init(&bodyReceiver);
 
@@ -40,15 +50,17 @@ void loop() {
     bodyReceiver.receiveData();
     imuReceiver.receiveData();
 
-    bodyMovement.run();
+    calibration.checkCalibration();
+
+    if (millis()- timer >= 20)
+    {
+        bodyMovement.run();
+    }
+    
+
     sounds.playSound();
 
     // domeMovement.moveServo(bodyData.TopLeftXJoystick, bodyData.TopLeftYJoystick);
-
-    // delay(250);
-
-    // Serial.println(analogRead(A0));
-    // delay(250);
 
     // Serial.println(analogRead(A1));
     // delay(250);
