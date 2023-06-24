@@ -1,14 +1,25 @@
 #include "DomeMovement.h"
 
-#define DomeXEase 0.7          // Speed of side to side domemovement, higher == faster
-#define DomeYEase 0.4          // Spead of front to back dome movement, higher == faster
-
-void DomeMovement::init()
+void DomeMovement::init(BodyReceiver* bodyReceiver, ImuReceiver* imuReveiver, Calibration* calibration)
 {
-    DomeMovement::leftServo.attach(LEFT_SERVO_PIN);
-    DomeMovement::rightServo.attach(RIGHT_SERVO_PIN);
+    DomeMovement::bodyReceiver = bodyReceiver;
+    DomeMovement::imuReveiver = imuReveiver;
+    DomeMovement::calibration = calibration;
+
+    DomeMovement::domeServo.init();
 }
 
-void DomeMovement::moveServo(int x, int y)
+void DomeMovement::run()
 {
+    DomeMovement::domeServo.setSpeed(DomeMovement::bodyReceiver->getSpeedValue());
+
+    DomeMovement::domeServo.setJoystickXValue(DomeMovement::bodyReceiver->getTopLeftXJoystickValue(), DomeMovement::bodyReceiver->getDirectionValue());
+    DomeMovement::domeServo.setJoystickYValue(DomeMovement::bodyReceiver->getTopLeftYJoystickValue(), DomeMovement::bodyReceiver->getDirectionValue());
+    DomeMovement::domeServo.setYPitchByMainDriveValue(
+        DomeMovement::bodyReceiver->getTopRightYJoystickValue(),
+        DomeMovement::imuReveiver->getPitchValue(),
+        DomeMovement::calibration->getPitchOffset()
+    );
+
+    DomeMovement::domeServo.move();
 }

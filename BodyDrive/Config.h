@@ -32,7 +32,7 @@
 #define SIDE_TO_SIDE_POT_PIN A0
 
 #define DOME_SPEED 60
-#define MAX_DOME_ANGLE_X 12      // Maximum angle to tilt the dome in the X axis ** - MAX IS 18
-#define MAX_DOME_ANGLE_Y  10      // Maximum angle to tilt the dome in the Y axis ** - MAX IS 20
-#define DomeXEase 0.7          // Speed of side to side domemovement, higher == faster
-#define DomeYEase 0.4          // Spead of front to back dome movement, higher == faster
+#define MAX_DOME_TILT_X 14      // Maximum angle to tilt the dome in the X axis ** - MAX IS 18
+#define MAX_DOME_TILT_Y  15      // Maximum angle to tilt the dome in the Y axis ** - MAX IS 20
+#define DOME_X_SPEED 0.7          // Speed of side to side domemovement, higher == faster
+#define DOME_Y_SPEED 0.4          // Spead of front to back dome movement, higher == faster

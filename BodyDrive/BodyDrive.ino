@@ -1,12 +1,9 @@
 #include <Arduino.h>
-// 
-// 
-// #include <EncButton2.h>
-// #include "src/DomeMovement.h"
 #include "src/Receivers/BodyReceiver.h"
 #include "src/Receivers/ImuReceiver.h"
 #include "src/Inputs.h"
 #include "src/BodyMovement.h"
+#include "src/DomeMovement.h"
 #include "src/Calibration.h"
 #include "src/Sounds.h"
  
@@ -15,7 +12,7 @@ ImuReceiver imuReceiver;
 Inputs inputs;
 
 BodyMovement bodyMovement;
-// DomeMovement domeMovement;
+DomeMovement domeMovement;
 
 Calibration calibration;
 
@@ -32,7 +29,8 @@ void setup() {
     imuReceiver.init();
 
     calibration.init(&bodyReceiver, &imuReceiver, &inputs);
-
+    
+    domeMovement.init(&bodyReceiver, &imuReceiver, &calibration);
     bodyMovement.init(&bodyReceiver, &imuReceiver, &inputs, &calibration);
     
     
@@ -42,8 +40,6 @@ void setup() {
 
     // leftServo.attach(4);
     // rightServo.attach(5);
-
-    // domeMovement.init();
 }
 
 void loop() {
@@ -55,7 +51,9 @@ void loop() {
     if (millis()- timer >= 20)
     {
         bodyMovement.run();
+        domeMovement.run();
     }
+
     
 
     sounds.playSound();

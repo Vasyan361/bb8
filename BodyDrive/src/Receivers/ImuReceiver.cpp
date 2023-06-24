@@ -14,9 +14,9 @@ void ImuReceiver::receiveData()
     if(ReceiveImu.receiveData()){
         ImuReceiver::active = true;
         ImuReceiver::lastReceiveDataTime = millis();
-        // Serial.print("imuLoop"); Serial.print(imuData.imuLoop); Serial.print(", ");
-        // Serial.print("pitch"); Serial.print(imuData.pitch); Serial.print(", ");
-        // Serial.print("roll"); Serial.println(imuData.roll);
+        // Serial.print("imuLoop "); Serial.print(imuData.imuLoop); Serial.print(", ");
+        // Serial.print("pitch "); Serial.print(imuData.pitch); Serial.print(", ");
+        // Serial.print("roll "); Serial.println(imuData.roll);
     }
 
      ImuReceiver::checkLastReceiveData();
