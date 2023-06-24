@@ -20,10 +20,10 @@ class JoystickControl {
         BodyTransmitData getJoystickControlTransmitData();
     private:
         Joystick joysticks[4] {
-            Joystick(LEFT_TOP_JOYSTICK_X_PIN, LEFT_TOP_JOYSTICK_Y_PIN, "Top left"),
-            Joystick(RIGHT_TOP_JOYSTICK_X_PIN, RIGHT_TOP_JOYSTICK_Y_PIN, "Top right"),
-            Joystick(LEFT_BOTTOM_JOYSTICK_X_PIN, 0, "Bottom left"),
-            Joystick(RIGHT_BOTTOM_JOYSTICK_X_PIN, 0, "Bottom right")
+            Joystick(LEFT_TOP_JOYSTICK_X_PIN, LEFT_TOP_JOYSTICK_Y_PIN, "Top left", false, true),
+            Joystick(RIGHT_TOP_JOYSTICK_X_PIN, RIGHT_TOP_JOYSTICK_Y_PIN, "Top right", false, false),
+            Joystick(LEFT_BOTTOM_JOYSTICK_X_PIN, 0, "Bottom left", false, false),
+            Joystick(RIGHT_BOTTOM_JOYSTICK_X_PIN, 0, "Bottom right", false, false)
         };
         enum {
             LEFT_TOP,

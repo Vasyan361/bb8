@@ -4,8 +4,7 @@ Joystick::Joystick(int xPin, int yPin)
 {
     Joystick::xPin = xPin;
     
-    if (yPin == 0)
-    {
+    if (yPin == 0) {
         Joystick::isSingleDirection = true;
     } else {
         Joystick::yPin = yPin;
@@ -13,23 +12,38 @@ Joystick::Joystick(int xPin, int yPin)
     
 }
 
-Joystick::Joystick(int xPin, int yPin, char *name)
+Joystick::Joystick(int xPin, int yPin, char *name, bool reverseX, bool reverseY)
 {
     Joystick::xPin = xPin;
-    Joystick::yPin = yPin;
+
+    if (yPin == 0) {
+        Joystick::isSingleDirection = true;
+    } else {
+        Joystick::yPin = yPin;
+    }
+
     Joystick::name = name;
+    Joystick::reverseX = reverseX;
+    Joystick::reverseY = reverseY;
 }
 
 int Joystick::getXValue()
 {
+    if (Joystick::reverseX) {
+        return constrain(map(analogRead(Joystick::xPin), 0, 4096, 4096, 0), 0, 4096);
+    }
+    
     return analogRead(Joystick::xPin);
 }
 
 int Joystick::getYValue()
 {
-    if (Joystick::isSingleDirection)
-    {
+    if (Joystick::isSingleDirection) {
         return 2096;
+    }
+
+    if (Joystick::reverseY) {
+        return constrain(map(analogRead(Joystick::yPin), 0, 4096, 4096, 0), 0, 4096);
     }
     
     return analogRead(Joystick::yPin);
