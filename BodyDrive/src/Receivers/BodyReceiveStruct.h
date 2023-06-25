@@ -15,4 +15,5 @@ struct BodyReceiveData
     int16_t soundMusic = 0;
     int16_t calibrationId = 0;
     int16_t motorEnable = 0;
+    int16_t domeLightMode = 0;
 };

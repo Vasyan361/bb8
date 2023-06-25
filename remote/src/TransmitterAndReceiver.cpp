@@ -56,6 +56,7 @@ void TransmitterAndReceiver::sendData()
     bodyData.soundMusic = TransmitterAndReceiver::buttonControl->getSoundMusic();
     bodyData.motorEnable = TransmitterAndReceiver::buttonControl->getMotorEnable();
     bodyData.calibrationId = TransmitterAndReceiver::menu->getCalibrationId();
+    bodyData.domeLightMode = TransmitterAndReceiver::buttonControl->getDomeLightMode();
 
     esp_err_t result = esp_now_send(TransmitterAndReceiver::bodyAddress, (uint8_t *) &bodyData, sizeof(bodyData));
 

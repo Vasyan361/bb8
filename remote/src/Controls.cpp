@@ -79,19 +79,26 @@ void Controls::rightLeftButtonClick()
 void Controls::rightUpButtonClick()
 {
     Serial.println("rightUpButtonClick");
+    Controls::domeLightMode++;
+    if(Controls::domeLightMode > 2) {
+        Controls::domeLightMode = 0;
+    }
 }
 
 void Controls::rightDownButtonClick()
 {
     Serial.println("rightDownButtonClick");
-    Controls::soundMusic = !Controls::soundMusic;
+    Controls::soundMusic++;
+    if(Controls::soundMusic > 5) {
+        Controls::soundMusic = 0;
+    }
 }
 
 void Controls::rightDownButtonDoubleClick()
 {
     Serial.println("rightDownButtonDoubleClick");
 
-    Controls::soundMusic = 2;
+    Controls::soundMusic = 6;
 }
 
 
@@ -124,4 +131,9 @@ int Controls::getSoundMusic()
 int Controls::getMotorEnable()
 {
     return digitalRead(MOTOR_ENABLE_PIN);
+}
+
+int Controls::getDomeLightMode()
+{
+    return Controls::domeLightMode;
 }

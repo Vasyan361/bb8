@@ -18,6 +18,7 @@ typedef struct BodyTransmitData {
     int16_t soundMusic = 0;
     int16_t calibrationId = 0;
     int16_t motorEnable = 0;
+    int16_t domeLightMode = 0;
 } BodyTransmitData;
  
 BodyTransmitData bodyData;
@@ -40,7 +41,9 @@ void OnDataReceive(const uint8_t * mac, const uint8_t *incomingData, int len) {
     // Serial.print(bodyData.soundBip); Serial.print(", ");
     // Serial.print(bodyData.soundMusic); Serial.print(", ");
     // Serial.print(bodyData.calibrationId); Serial.print(", ");
-    // Serial.println(bodyData.motorEnable);
+    // Serial.print(bodyData.motorEnable); Serial.print(", ");
+    // Serial.println(bodyData.domeLightMode);
+    
 }
  
 void setup() {

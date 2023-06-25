@@ -43,10 +43,10 @@ void Sounds::playSoundMusic()
     {
         Sounds::lastSoundMusic = Sounds::bodyReceiver->getSoundMusicValue();
 
-        if (2 == Sounds::bodyReceiver->getSoundMusicValue()) {
+        if (6 == Sounds::bodyReceiver->getSoundMusicValue()) {
             myDFPlayer.playFolder(2, 42);
         }
 
-        myDFPlayer.playFolder(2, random(1, 5));
+        myDFPlayer.playFolder(2, Sounds::bodyReceiver->getSoundMusicValue());
     }
 }

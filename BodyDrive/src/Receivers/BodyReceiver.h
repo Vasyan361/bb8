@@ -23,6 +23,7 @@ class BodyReceiver
         int16_t getSoundMusicValue();
         int16_t getCalibrationIdValue();
         int16_t isEnabledMotor();
+        int16_t getDomeLightMode();
     private:
         EasyTransfer ReceiveBody;
         bool active;

@@ -105,3 +105,8 @@ void BodyReceiver::checkLastReceiveData()
         BodyReceiver::active = false;
     }
 }
+
+int16_t BodyReceiver::getDomeLightMode()
+{
+    return bodyData.domeLightMode;
+}

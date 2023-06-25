@@ -25,6 +25,7 @@ class Controls {
         int getSoundBip();
         int getSoundMusic();
         int getMotorEnable();
+        int getDomeLightMode();
     private:
         OneButton buttons[10] {
             // joystick buttons
@@ -61,5 +62,6 @@ class Controls {
         int direction = 0;
         int soundBip = 0;
         int soundMusic = 0;
+        int domeLightMode = 0;
 };
         
