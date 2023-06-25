@@ -35,6 +35,7 @@
 #define SIDE_TO_SIDE_ENABLE_PIN 33
 
 #define SIDE_TO_SIDE_POT_PIN A0
+#define BATTERY_VOLTAGE_PIN A1
 
 #define DOME_SPEED 60
 #define MAX_DOME_TILT_X 14      // Maximum angle to tilt the dome in the X axis ** - MAX IS 18

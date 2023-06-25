@@ -27,7 +27,8 @@ void BodyReceiver::receiveData()
         // Serial.print(bodyData.soundBip); Serial.print(", ");
         // Serial.print(bodyData.soundMusic); Serial.print(", ");
         // Serial.print(bodyData.calibrationId); Serial.print(", ");
-        // Serial.println(bodyData.motorEnable);
+        // Serial.print(bodyData.motorEnable); Serial.print(", ");
+        // Serial.println(bodyData.domeLightMode);
     }
 
     BodyReceiver::checkLastReceiveData();
@@ -98,15 +99,15 @@ int16_t BodyReceiver::isEnabledMotor()
     return bodyData.motorEnable;
 }
 
+int16_t BodyReceiver::getDomeLightMode()
+{
+    return bodyData.domeLightMode;
+}
+
 void BodyReceiver::checkLastReceiveData()
 {
     if (millis() - BodyReceiver::lastReceiveDataTime > 15000)
     {
         BodyReceiver::active = false;
     }
-}
-
-int16_t BodyReceiver::getDomeLightMode()
-{
-    return bodyData.domeLightMode;
 }

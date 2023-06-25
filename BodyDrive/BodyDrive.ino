@@ -6,6 +6,7 @@
 #include "src/DomeMovement.h"
 #include "src/Calibration.h"
 #include "src/Sounds.h"
+#include "src/BodyTransmiter.h"
  
 BodyReceiver bodyReceiver;
 ImuReceiver imuReceiver;
@@ -17,6 +18,8 @@ DomeMovement domeMovement;
 Calibration calibration;
 
 Sounds sounds;
+
+BodyTransmiter bodyTransmiter;
 
 uint32_t timer;
 
@@ -34,6 +37,8 @@ void setup() {
     bodyMovement.init(&bodyReceiver, &imuReceiver, &inputs, &calibration, &domeMovement);
     
     sounds.init(&bodyReceiver);
+
+    bodyTransmiter.init(&bodyReceiver, &inputs);
 }
 
 void loop() {
@@ -48,12 +53,14 @@ void loop() {
         bodyMovement.run();
     }
 
-    
-
     sounds.playSound();
+    inputs.readBatteryVoltage();
 
-    // Serial.println(analogRead(A1));
-    // delay(250);
+    bodyTransmiter.sendData();
+
+
+
+    // Serial.println(inputs.getBatteryVoltage());
 
     // enc.tick();
     // if (enc.turn()) {
