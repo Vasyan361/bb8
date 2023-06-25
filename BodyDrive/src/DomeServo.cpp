@@ -18,6 +18,12 @@ void DomeServo::move()
     DomeServo::rightServo.write(constrain(map(DomeServo::rightServoOffset, -90, 90, 180, 0), 0, 180), DOME_SPEED, false);
 }
 
+void DomeServo::moveToCenter()
+{
+    DomeServo::leftServo.write(90, 50, false);
+    DomeServo::rightServo.write(90, 50, false);
+}
+
 void DomeServo::setJoystickXValue(int16_t val, int8_t direction)
 {
     if(direction == 0){
@@ -60,7 +66,7 @@ void DomeServo::setYPitchByMainDriveValue(int16_t val, float pitch, float pitchO
     int maidDriveMap = constrain(map(val, 0, 1024, -100, 100), -100, 100);
 
     if(maidDriveMap >= DomeServo::speedMoveConstraint || maidDriveMap <= -DomeServo::speedMoveConstraint){
-        DomeServo::yPitch = DomeServo::joystickYValue + abs(pitch) - pitchOffset;
+        DomeServo::yPitch = DomeServo::joystickYValue - (pitch + pitchOffset);
     } else{
         // DomeServo::yPitch = DomeServo::joystickYValue - pitchOffset;
         DomeServo::yPitch = DomeServo::joystickYValue;

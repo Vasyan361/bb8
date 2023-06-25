@@ -33,13 +33,7 @@ void setup() {
     domeMovement.init(&bodyReceiver, &imuReceiver, &calibration);
     bodyMovement.init(&bodyReceiver, &imuReceiver, &inputs, &calibration);
     
-    
-
     sounds.init(&bodyReceiver);
-
-
-    // leftServo.attach(4);
-    // rightServo.attach(5);
 }
 
 void loop() {
@@ -57,8 +51,6 @@ void loop() {
     
 
     sounds.playSound();
-
-    // domeMovement.moveServo(bodyData.TopLeftXJoystick, bodyData.TopLeftYJoystick);
 
     // Serial.println(analogRead(A1));
     // delay(250);

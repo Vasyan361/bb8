@@ -9,6 +9,7 @@ class DomeServo
     public:
         void init();
         void move();
+        void moveToCenter();
         void setJoystickXValue(int16_t val, int8_t direction);
         void setJoystickYValue(int16_t val, int8_t direction);
         void setSpeed(int8_t speed);

@@ -6,6 +6,7 @@
 #include "Receivers/ImuReceiver.h"
 #include "Calibration.h"
 #include "DomeServo.h"
+#include "Motors/DomeMotor.h"
 
 class DomeMovement {
     public:
@@ -16,4 +17,5 @@ class DomeMovement {
         ImuReceiver* imuReveiver;
         Calibration* calibration;
         DomeServo domeServo = DomeServo();
+        DomeMotor domeMototr = DomeMotor();
 };
