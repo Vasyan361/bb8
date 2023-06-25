@@ -9,17 +9,19 @@
 #include "Motors/SideToSideMotor.h"
 #include "Motors/FlywheelSpinMotor.h"
 #include "Motors/MainDriveMotor.h"
+#include "DomeMovement.h"
 
 class BodyMovement
 {
     public:
-        void init(BodyReceiver* bodyReceiver, ImuReceiver* imuReveiver, Inputs* inputs, Calibration* calibration);
+        void init(BodyReceiver* bodyReceiver, ImuReceiver* imuReveiver, Inputs* inputs, Calibration* calibration, DomeMovement* domeMovement);
         void run();
     private:
         BodyReceiver* bodyReceiver;
         ImuReceiver* imuReveiver;
         Inputs* inputs;
         Calibration* calibration;
+        DomeMovement* domeMovement;
         SideToSideMotor sideToSideMotor = SideToSideMotor();
         FlywheelSpinMotor flywheelSpinMotor = FlywheelSpinMotor();
         MainDriveMotor mainDriveMotor = MainDriveMotor();

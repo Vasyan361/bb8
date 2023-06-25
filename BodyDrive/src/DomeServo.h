@@ -14,6 +14,7 @@ class DomeServo
         void setJoystickYValue(int16_t val, int8_t direction);
         void setSpeed(int8_t speed);
         void setYPitchByMainDriveValue(int16_t val, float pitch, float pitchOffset);
+        float getYAngle();
     private:
         VarSpeedServo leftServo;
         VarSpeedServo rightServo;

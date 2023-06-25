@@ -1,11 +1,12 @@
 #include "BodyMovement.h"
 
-void BodyMovement::init(BodyReceiver* bodyReceiver, ImuReceiver* imuReveiver, Inputs* inputs, Calibration* calibration)
+void BodyMovement::init(BodyReceiver* bodyReceiver, ImuReceiver* imuReveiver, Inputs* inputs, Calibration* calibration, DomeMovement* domeMovement)
 {
     BodyMovement::bodyReceiver = bodyReceiver;
     BodyMovement::imuReveiver = imuReveiver;
     BodyMovement::inputs = inputs;
     BodyMovement::calibration = calibration;
+    BodyMovement::domeMovement = domeMovement;
 
     pinMode(FLYWHEEL_SPIN_AND_MAIN_DRIVE_ENABLE_PIN, OUTPUT);
     pinMode(SIDE_TO_SIDE_ENABLE_PIN, OUTPUT);
@@ -31,7 +32,12 @@ void BodyMovement::run()
         BodyMovement::sideToSideMotor.run();
 
 
-        BodyMovement::mainDriveMotor.run(BodyMovement::bodyReceiver->getTopRightYJoystickValue());
+        BodyMovement::mainDriveMotor.setJoystickValue(BodyMovement::bodyReceiver->getTopRightYJoystickValue(), BodyMovement::bodyReceiver->getDirectionValue());
+        BodyMovement::mainDriveMotor.setPitch(BodyMovement::imuReveiver->getPitchValue());
+        BodyMovement::mainDriveMotor.setPitchOffset(BodyMovement::calibration->getPitchOffset());
+        BodyMovement::mainDriveMotor.setServoYAngle(BodyMovement::domeMovement->getServoYAngle());
+        BodyMovement::mainDriveMotor.run();
+
         BodyMovement::flywheelSpinMotor.run(BodyMovement::bodyReceiver->getBottomRightXJoystickValue());
     } else {
         BodyMovement::shutdownMotor();

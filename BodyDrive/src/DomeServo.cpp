@@ -73,6 +73,11 @@ void DomeServo::setYPitchByMainDriveValue(int16_t val, float pitch, float pitchO
     }
 }
 
+float DomeServo::getYAngle()
+{
+    return DomeServo::yAngle;
+}
+
 void DomeServo::calculateXAngle()
 {
     if((DomeServo::joystickXValue + DOME_X_SPEED) > DomeServo::xAngle && (DomeServo::joystickXValue - DOME_X_SPEED) < DomeServo::xAngle){

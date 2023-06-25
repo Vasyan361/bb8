@@ -31,7 +31,7 @@ void setup() {
     calibration.init(&bodyReceiver, &imuReceiver, &inputs);
     
     domeMovement.init(&bodyReceiver, &imuReceiver, &calibration);
-    bodyMovement.init(&bodyReceiver, &imuReceiver, &inputs, &calibration);
+    bodyMovement.init(&bodyReceiver, &imuReceiver, &inputs, &calibration, &domeMovement);
     
     sounds.init(&bodyReceiver);
 }
@@ -44,8 +44,8 @@ void loop() {
 
     if (millis()- timer >= 20)
     {
-        bodyMovement.run();
         domeMovement.run();
+        bodyMovement.run();
     }
 
     

@@ -30,3 +30,8 @@ void DomeMovement::run()
         DomeMovement::domeServo.moveToCenter();
     }
 }
+
+float DomeMovement::getServoYAngle()
+{
+    return DomeMovement::domeServo.getYAngle();
+}

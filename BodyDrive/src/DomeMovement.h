@@ -12,6 +12,7 @@ class DomeMovement {
     public:
         void init(BodyReceiver* bodyReceiver, ImuReceiver* imuReveiver, Calibration* calibration);
         void run();
+        float getServoYAngle();
     private:
         BodyReceiver* bodyReceiver;
         ImuReceiver* imuReveiver;
