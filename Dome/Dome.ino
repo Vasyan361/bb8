@@ -14,6 +14,9 @@
 
 // #define DELAYVAL 500 // Time (in milliseconds) to pause between pixels
 
+
+//40:22:D8:02:A1:58 remote
+
 typedef struct BodyReceiveData {
     int16_t psi = 0;
     int16_t domeLightMode = 0;
