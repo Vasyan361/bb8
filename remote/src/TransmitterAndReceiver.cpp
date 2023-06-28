@@ -5,6 +5,20 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
     Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
 }
 
+typedef struct DomeData {
+    float bodyBattery = 0;
+    float domeBattery = 0;
+} DomeData;
+ 
+DomeData domeData;
+
+void OnDataReceive(const uint8_t * mac, const uint8_t *incomingData, int len) {
+    memcpy(&domeData, incomingData, sizeof(domeData));
+
+    // Serial.print(domeData.bodyBattery); Serial.print(", ");
+    // Serial.println(domeData.domeBattery);
+}
+
 void TransmitterAndReceiver::init(uint8_t bodyAddress[])
 {
     memcpy(TransmitterAndReceiver::bodyAddress, bodyAddress, 6);
@@ -29,6 +43,8 @@ void TransmitterAndReceiver::init(uint8_t bodyAddress[])
         Serial.println("Failed to add peer");
         return;
     }
+
+    esp_now_register_recv_cb(OnDataReceive);
 }
 
 void TransmitterAndReceiver::setJoystickControl(JoystickControl* joystickControl)
@@ -66,4 +82,7 @@ void TransmitterAndReceiver::sendData()
     else {
         Serial.println("Error sending the data");
     }
+
+    TransmitterAndReceiver::menu->setBodyBattery(domeData.bodyBattery);
+    TransmitterAndReceiver::menu->setDomeBattery(domeData.domeBattery);
 }

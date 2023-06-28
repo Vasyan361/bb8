@@ -13,7 +13,6 @@ void Display::init()
     Display::display.println(F("====================="));
     Display::display.println(F("     Joe's Drive"));
     Display::display.println(F("====================="));
-    Display::display.println(F("Lol Kek"));
 
     Display::display.display();
 
@@ -47,14 +46,27 @@ void Display::printPointer(int alignment)
     Display::display.print(">");
 }
 
-void Display::infoScreen(int speed, int direction)
+void Display::infoScreen(int speed, int direction, float bodyBattery, float domeBattery)
 {
     Display::prepareForPrint();
 
     // TODO:: реализовать логику
     Display::display.print(Display::speedNameMap[speed]); Display::display.println(Display::directionNameMap[direction]);
     Display::display.println(F(""));
-    Display::display.println("Remote: ");
+    Display::display.print("Body: ");
+    if (bodyBattery > 0) {
+        Display::display.print(bodyBattery); Display::display.println("V");
+    } else {
+        Display::display.println("dissconnected");
+    }
+
+    Display::display.println(F(""));
+    Display::display.print("Dome: ");
+    if (domeBattery > 0) {
+        Display::display.print(domeBattery); Display::display.println("V");
+    } else {
+        Display::display.println("dissconnected");
+    }
 
     Display::display.display();
 }

@@ -45,6 +45,8 @@ void OnDataReceive(const uint8_t * mac, const uint8_t *incomingData, int len) {
 		needSend =true;
 	}
     memcpy(&bodyData, incomingData, sizeof(bodyData));
+
+
     // Serial.print(bodyData.psi); Serial.print(", ");
     // Serial.print(bodyData.domeLightMode); Serial.print(", ");
     // Serial.println(bodyData.bodyBattery);
@@ -116,7 +118,7 @@ void loop() {
 		inputs.readBatteryVoltage();
 
 		remoteData.bodyBattery = bodyData.bodyBattery;
-		remoteData.bodyBattery = inputs.getBatteryVoltage();
+		remoteData.domeBattery = inputs.getBatteryVoltage();
 
 		esp_err_t result = esp_now_send(remoteAddress, (uint8_t *) &remoteData, sizeof(remoteData));
 

@@ -12,7 +12,7 @@ void Menu::navigate()
 
     switch (Menu::mode)
     {
-        case INFO_SCREEN: Menu::display.infoScreen(Menu::speed, Menu::direction); break;
+        case INFO_SCREEN: Menu::display.infoScreen(Menu::speed, Menu::direction, Menu::bodyBattery, Menu::domeBattery); break;
         case MENU_SCREEN: Menu::display.menuScreen(); break;
         case DOME_REVERSE_SCREEN: Menu::display.domeReverseScreen(); break;
         case DOME_CONFIG_SCREEN: Menu::display.domeConfigScreen(); break;
@@ -107,4 +107,14 @@ void Menu::setDirection(int direction)
 int Menu::getCalibrationId()
 {
     return Menu::calibrationId;
+}
+
+void Menu::setBodyBattery(float bodyBattery)
+{
+    Menu::bodyBattery = bodyBattery;
+}
+
+void Menu::setDomeBattery(float domeBattery)
+{
+    Menu::domeBattery = domeBattery;
 }

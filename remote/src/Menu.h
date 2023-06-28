@@ -16,6 +16,8 @@ class Menu {
         void setSpeed(int speed);
         void setDirection(int direction);
         int getCalibrationId();
+        void setBodyBattery(float bodyBattery);
+        void setDomeBattery(float domeBattery);
     private:
         Display display = Display();
         int mode = 0;
@@ -108,5 +110,7 @@ class Menu {
         int speed = 0;
         int direction = 0;
         int calibrationId = 0;
+        float bodyBattery = 0;
+        float domeBattery = 0;
         void modeAction();
 };

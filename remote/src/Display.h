@@ -10,7 +10,7 @@ class Display {
     public:
         void init();
         void setPointer(int pointer);
-        void infoScreen(int speed, int direction);
+        void infoScreen(int speed, int direction, float bodyBattery, float domeBattery);
         void menuScreen();
         void domeReverseScreen();
         void domeConfigScreen();
