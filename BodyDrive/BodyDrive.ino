@@ -7,6 +7,7 @@
 #include "src/Calibration.h"
 #include "src/Sounds.h"
 #include "src/BodyTransmiter.h"
+#include "src/Light.h"
  
 BodyReceiver bodyReceiver;
 ImuReceiver imuReceiver;
@@ -20,6 +21,8 @@ Calibration calibration;
 Sounds sounds;
 
 BodyTransmiter bodyTransmiter;
+
+Light light;
 
 uint32_t timer;
 
@@ -39,6 +42,8 @@ void setup() {
     sounds.init(&bodyReceiver);
 
     bodyTransmiter.init(&bodyReceiver, &inputs);
+
+    light.init();
 }
 
 void loop() {
