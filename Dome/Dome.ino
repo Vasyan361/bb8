@@ -1,18 +1,17 @@
 #include <Adafruit_NeoPixel.h>
 #include <esp_now.h>
 #include <WiFi.h>
+#include "src/Eye.h"
+#include "src/LargeLogic.h"
+#include "src/SmallLogic.h"
+#include "src/Holoprojector.h"
 
-// #define PIN  19
+Eye eye;
+LargeLogic largeLogic;
+SmallLogic smallLogic;
+Holoprojector holoprojector;
 
-// #define NUMPIXELS 1
-
-// Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
-// Adafruit_NeoPixel pixels2(NUMPIXELS, 18, NEO_GRB + NEO_KHZ800);
-// Adafruit_NeoPixel pixels3(NUMPIXELS, 5, NEO_GRB + NEO_KHZ800);
-// Adafruit_NeoPixel pixels4(NUMPIXELS, 17, NEO_GRB + NEO_KHZ800);
-// Adafruit_NeoPixel pixels5(NUMPIXELS, 16, NEO_GRB + NEO_KHZ800);
-
-// #define DELAYVAL 500 // Time (in milliseconds) to pause between pixels
+uint32_t timer;
 
 
 //40:22:D8:02:A1:58 remote
@@ -42,63 +41,19 @@ void setup() {
   }
   esp_now_register_recv_cb(OnDataReceive);
 
-//   pixels.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
-//   pixels2.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
-//   pixels3.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
-//   pixels4.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
-//   pixels5.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
+  eye.init();
+  largeLogic.init();
+  smallLogic.init();
+  holoprojector.init();
 }
 
 void loop() {
-  // clear(); // Set all pixel colors to 'off'
+  if (millis() - timer >= 40) {
+        timer = millis();
 
-  // show(0, 150, 0);
-
-  // Serial.println(analogRead(32));
-
-
-  // delay(DELAYVAL); // Pause before next pass through loop
-
-  // clear();
-
-  // show(150, 0, 0);
-
-  // Serial.println(analogRead(32));
-
-
-  // delay(DELAYVAL); // Pause before next pass through loop
-
-  // clear();
-
-  // show(0, 0, 150);
-
-  // Serial.println(analogRead(32));
-
-
-  // delay(DELAYVAL); // Pause before next pass through loop
+        eye.fade();
+        largeLogic.randomBlink();
+        smallLogic.randomBlink();
+        holoprojector.cycle();
+  }
 }
-
-// void clear()
-// {
-//   pixels.clear();
-//   pixels2.clear();
-//   pixels3.clear();
-//   pixels4.clear();
-//   pixels5.clear();
-// }
-
-// void show(uint8_t r, uint8_t g, uint8_t b)
-// {
-//   pixels.setPixelColor(0, pixels.Color(r, g, b));
-//   pixels2.setPixelColor(0, pixels2.Color(r, g, b));
-//   pixels3.setPixelColor(0, pixels3.Color(r, g, b));
-//   pixels4.setPixelColor(0, pixels4.Color(r, g, b));
-//   pixels5.setPixelColor(0, pixels5.Color(r, g, b));
-
-//   pixels.show();
-//   pixels2.show();
-//   pixels3.show();
-//   pixels4.show();
-//   pixels5.show();
-
-// }
