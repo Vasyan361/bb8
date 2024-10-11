@@ -23,6 +23,7 @@ void Transmitter::init(uint8_t remoteAddress[6])
     memcpy(peerInfo.peer_addr, remoteAddress, 6);
     memcpy(Transmitter::remoteAddress, remoteAddress, 6);
     if (esp_now_add_peer(&peerInfo) != ESP_OK){
+        Serial.println("Failed to add peer");
         return;
     }
 }
@@ -31,12 +32,7 @@ void Transmitter::send()
 {
     esp_err_t result = esp_now_send(remoteAddress, (uint8_t *) &remoteData, sizeof(remoteData));
 
-    if (result == ESP_OK) {
-        Serial.println("Sent with success");
-    }
-    else {
-        Serial.println("Error sending the data");
-    }
+    Serial.println(result == ESP_OK ? "Sent with success" : "Error sending the data");
 }
 
 void Transmitter::setBodyBattery(float bodyBattery)
