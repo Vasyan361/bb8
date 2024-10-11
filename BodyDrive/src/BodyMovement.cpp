@@ -64,7 +64,6 @@ void BodyMovement::setSpeed()
         BodyMovement::lastSpeedValue = BodyMovement::bodyReceiver->getSpeedValue();
 
         BodyMovement::mainDriveMotor.setSpeed(BodyMovement::speedMap[BodyMovement::bodyReceiver->getSpeedValue()]);
-        BodyMovement::flywheelSpinMotor.setSpeed(BodyMovement::speedMap[BodyMovement::bodyReceiver->getSpeedValue()]);
     }
     
 }

@@ -4,7 +4,7 @@ void DomeServo::init()
 {
     DomeServo::leftServo.attach(LEFT_SERVO_PIN);
     DomeServo::rightServo.attach(RIGHT_SERVO_PIN);
-    DomeServo::leftServo.write(90, 50, false);
+    DomeServo::leftServo.write(95, 50, false);
     DomeServo::rightServo.write(90, 50, false);
 }
 
@@ -14,7 +14,7 @@ void DomeServo::move()
     DomeServo::calculateYAngle();
     DomeServo::CalculateServoOffsets();
 
-    DomeServo::leftServo.write(constrain(map(DomeServo::leftServoOffset, -90, 90, 0, 180),0, 180), DOME_SPEED, false);
+    DomeServo::leftServo.write(constrain(map(DomeServo::leftServoOffset, -90, 90, 0, 180),0, 180) + 5, DOME_SPEED, false);
     DomeServo::rightServo.write(constrain(map(DomeServo::rightServoOffset, -90, 90, 180, 0), 0, 180), DOME_SPEED, false);
 }
 
@@ -42,7 +42,7 @@ void DomeServo::setJoystickYValue(int16_t val, int8_t direction)
     if(direction == 0){
       DomeServo::joystickYValue = map(val, 0, 1024, -MAX_DOME_TILT_Y, MAX_DOME_TILT_Y);
     } else{
-      DomeServo::joystickYValue = map(val, 0, 512, MAX_DOME_TILT_Y, -MAX_DOME_TILT_Y);
+      DomeServo::joystickYValue = map(val, 0, 1024, MAX_DOME_TILT_Y, -MAX_DOME_TILT_Y);
     }
 
     if(DomeServo::joystickYValue <= 1.7 && DomeServo::joystickYValue >= -1.7){  
@@ -68,9 +68,10 @@ void DomeServo::setYPitchByMainDriveValue(int16_t val, float pitch, float pitchO
     if(maidDriveMap >= DomeServo::speedMoveConstraint || maidDriveMap <= -DomeServo::speedMoveConstraint){
         DomeServo::yPitch = DomeServo::joystickYValue - (pitch + pitchOffset);
     } else{
-        // DomeServo::yPitch = DomeServo::joystickYValue - pitchOffset;
-        DomeServo::yPitch = DomeServo::joystickYValue;
+        DomeServo::yPitch = DomeServo::joystickYValue - pitchOffset;
+        // DomeServo::yPitch = DomeServo::joystickYValue;
     }
+    // DomeServo::yPitch = DomeServo::joystickYValue;
 }
 
 float DomeServo::getYAngle()

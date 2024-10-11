@@ -9,7 +9,8 @@ void MainDriveMotor::init()
 
 void MainDriveMotor::run()
 {
-    MainDriveMotor::motor.setSpeed(MainDriveMotor::mainDrivePid.getResult());
+    // MainDriveMotor::motor.setSpeed(MainDriveMotor::mainDrivePid.getResult());
+    MainDriveMotor::motor.setSpeed(MainDriveMotor::joystickValue);
 }
 
 void MainDriveMotor::setSpeed(int speed)
@@ -21,9 +22,9 @@ void MainDriveMotor::setJoystickValue(int16_t val, int8_t direction)
 {
     if(direction == 0)
     {
-      MainDriveMotor::joystickValue = map(val, 0, 1024, -MainDriveMotor::speed, MainDriveMotor::speed);
+      MainDriveMotor::joystickValue = constrain(map(val, 0, 1024, -MainDriveMotor::speed, MainDriveMotor::speed), -MainDriveMotor::speed, MainDriveMotor::speed);
     }else{
-      MainDriveMotor::joystickValue = map(val, 0, 1024, MainDriveMotor::speed, -MainDriveMotor::speed);
+      MainDriveMotor::joystickValue = constrain(map(val, 0, 1024, MainDriveMotor::speed, -MainDriveMotor::speed), MainDriveMotor::speed, -MainDriveMotor::speed);
     }
 
     MainDriveMotor::mainDrivePid.setpoint = constrain(MainDriveMotor::joystickValue, -55, 55);

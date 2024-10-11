@@ -69,7 +69,7 @@ void setup() {
     esp_now_register_send_cb(OnDataSent);
     
     // Указываем получателя
-    esp_now_peer_info_t peerInfo;
+    esp_now_peer_info_t peerInfo = {};
     memcpy(peerInfo.peer_addr, domeAddress, 6);
     peerInfo.channel = 0;  
     peerInfo.encrypt = false;
@@ -92,12 +92,12 @@ void loop() {
 
         esp_err_t result = esp_now_send(domeAddress, (uint8_t *) &bodyReceiveData, sizeof(bodyReceiveData));
 
-        if (result == ESP_OK) {
-            Serial.println("Sent with success");
-        }
-        else {
-            Serial.println("Error sending the data");
-        }
+        // if (result == ESP_OK) {
+        //     Serial.println("Sent with success");
+        // }
+        // else {
+        //     Serial.println("Error sending the data");
+        // }
     }
 }
 
