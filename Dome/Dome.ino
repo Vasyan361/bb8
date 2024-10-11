@@ -1,11 +1,11 @@
 #include <Adafruit_NeoPixel.h>
 #include <esp_now.h>
 #include <WiFi.h>
-#include "src/Eye.h"
-#include "src/LargeLogic.h"
-#include "src/SmallLogic.h"
-#include "src/Holoprojector.h"
-#include "src/Psi.h"
+#include "src/Light/Eye.h"
+#include "src/Light/LargeLogic.h"
+#include "src/Light/SmallLogic.h"
+#include "src/Light/Holoprojector.h"
+#include "src/Light/Psi.h"
 #include "src/Inputs.h"
 
 Eye eye;
