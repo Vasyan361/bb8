@@ -2,42 +2,42 @@
 
 void Psi::init()
 {
-    Psi::pixel.begin();
+    pixel.begin();
     
 }
 
 void Psi::low()
 {
-    Psi::pixel.setPixelColor(0, Psi::pixel.Color(60, 60, 60));
-    Psi::pixel.show();
+    pixel.setPixelColor(0, pixel.Color(60, 60, 60));
+    pixel.show();
 }
 
 void Psi::fade()
 {
-    if (millis() - Psi::timer > 500)
+    if (millis() - timer > 500)
     {
-        Psi::pixel.setPixelColor(0, Psi::pixel.Color(60, 60, 60));
+        pixel.setPixelColor(0, pixel.Color(60, 60, 60));
     }
 
-    if (millis() - Psi::timer > 1000)
+    if (millis() - timer > 1000)
     {
-        Psi::timer = millis();
+        timer = millis();
 
-        Psi::pixel.setPixelColor(0, Psi::pixel.Color(200, 200, 200));
+        pixel.setPixelColor(0, pixel.Color(200, 200, 200));
     }
 
-    Psi::pixel.show();
+    pixel.show();
 }
 
 void Psi::randomBlink()
 {
-    if (millis() - Psi::timer > Psi::randomInterval)
+    if (millis() - timer > randomInterval)
     {
-        Psi::timer = millis();
-        Psi::randomInterval = random(100,300);
+        timer = millis();
+        randomInterval = random(100,300);
 
-        Psi::pixel.setPixelColor(0, Psi::pixel.Color(random(0, 255),random(0, 255),random(0, 255)));
+        pixel.setPixelColor(0, pixel.Color(random(0, 255),random(0, 255),random(0, 255)));
     }
 
-    Psi::pixel.show();
+    pixel.show();
 }

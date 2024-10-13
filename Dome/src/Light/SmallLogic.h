@@ -13,9 +13,9 @@ class SmallLogic
         void randomBlink();
     private:
         Adafruit_NeoPixel pixel = Adafruit_NeoPixel(2, SMALL_LOGIC_PIN, NEO_GRB + NEO_KHZ800);
-        int fadeState = 0;
-        int red = 0;
-        int green = 0;
-        int blue = 0;
+        uint8_t fadeState = 0;
+        uint8_t red = 0;
+        uint8_t green = 0;
+        uint8_t blue = 0;
         uint32_t randomTimer;
 };

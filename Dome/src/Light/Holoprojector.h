@@ -13,9 +13,9 @@ class Holoprojector
         void cycle();
     private:
         Adafruit_NeoPixel pixel = Adafruit_NeoPixel(1, HOLOPROJECTOR_PIN, NEO_GRB + NEO_KHZ800);
-        int pulseState = 0;
-        int cycleState = 0;
-        int red = 0;
-        int green = 0;
-        int blue = 0;
+        uint8_t pulseState = 0;
+        uint8_t cycleState = 0;
+        uint8_t red = 0;
+        uint8_t green = 0;
+        uint8_t blue = 0;
 };

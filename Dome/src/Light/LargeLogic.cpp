@@ -2,18 +2,18 @@
 
 void LargeLogic::init()
 {
-    LargeLogic::pixel.begin();
+    pixel.begin();
 }
 
 void LargeLogic::topWhite()
 {
-    LargeLogic::pixel.clear();
+    pixel.clear();
 
     for (int i = 0; i < 2; i++) {
-        LargeLogic::pixel.setPixelColor(i, LargeLogic::pixel.Color(47, 49, 50));
+        pixel.setPixelColor(i, pixel.Color(47, 49, 50));
     }
 
-    LargeLogic::pixel.show();
+    pixel.show();
 }
 
 void LargeLogic::fade()
@@ -21,46 +21,46 @@ void LargeLogic::fade()
     
 
 
-    switch (LargeLogic::fadeState)
+    switch (fadeState)
     {
     case 0:
-        LargeLogic::fadeA++;
-        if (LargeLogic::fadeB > 0) {
-            LargeLogic::fadeB--;
+        fadeA++;
+        if (fadeB > 0) {
+            fadeB--;
         }
         break;
     case 1:
-        LargeLogic::fadeA--;
-        LargeLogic::fadeB++;
+        fadeA--;
+        fadeB++;
         break;
     default:
         break;
     }
 
-    constrain(LargeLogic::fadeA, 0, 50);
-    constrain(LargeLogic::fadeB, 0, 50);
+    constrain(fadeA, 0, 50);
+    constrain(fadeB, 0, 50);
 
-    if(LargeLogic::fadeA == 50){
-        LargeLogic::fadeState = 1;
-    } else if (LargeLogic::fadeA == 0){
-        LargeLogic::fadeState = 0;
+    if(fadeA == 50){
+        fadeState = 1;
+    } else if (fadeA == 0){
+        fadeState = 0;
     }
 
-    LargeLogic::pixel.setPixelColor(0, LargeLogic::pixel.Color(LargeLogic::fadeA, LargeLogic::fadeA, LargeLogic::fadeA)); 
-    LargeLogic::pixel.setPixelColor(1, LargeLogic::pixel.Color(LargeLogic::fadeA, LargeLogic::fadeA, LargeLogic::fadeA)); 
-    LargeLogic::pixel.setPixelColor(2, LargeLogic::pixel.Color(LargeLogic::fadeB, LargeLogic::fadeB, LargeLogic::fadeB)); 
-    LargeLogic::pixel.setPixelColor(3, LargeLogic::pixel.Color(LargeLogic::fadeB, LargeLogic::fadeB, LargeLogic::fadeB)); 
-    LargeLogic::pixel.show();
+    pixel.setPixelColor(0, pixel.Color(fadeA, fadeA, fadeA)); 
+    pixel.setPixelColor(1, pixel.Color(fadeA, fadeA, fadeA)); 
+    pixel.setPixelColor(2, pixel.Color(fadeB, fadeB, fadeB)); 
+    pixel.setPixelColor(3, pixel.Color(fadeB, fadeB, fadeB)); 
+    pixel.show();
 
     
 }
 
 void LargeLogic::randomBlink()
 {
-    if(millis() - LargeLogic::randomTimer > 300) {
-      LargeLogic::randomTimer = millis();
+    if(millis() - randomTimer > 300) {
+      randomTimer = millis();
 
-      LargeLogic::pixel.setPixelColor(random(0, 6), LargeLogic::pixel.Color(random(0, 255),random(0, 255),random(0, 255))); 
-      LargeLogic::pixel.show();
+      pixel.setPixelColor(random(0, 6), pixel.Color(random(0, 255),random(0, 255),random(0, 255))); 
+      pixel.show();
     }
 }
