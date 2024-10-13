@@ -1,5 +1,7 @@
 #pragma once
 
+#define DEBUG
+
 // left top Joystick
 #define LEFT_TOP_JOYSTICK_X_PIN 34
 #define LEFT_TOP_JOYSTICK_Y_PIN 35
