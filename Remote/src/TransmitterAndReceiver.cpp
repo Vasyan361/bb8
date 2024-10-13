@@ -21,7 +21,7 @@ void OnDataReceive(const uint8_t * mac, const uint8_t *incomingData, int len) {
 
 void TransmitterAndReceiver::init(uint8_t bodyAddress[])
 {
-    memcpy(TransmitterAndReceiver::bodyAddress, bodyAddress, 6);
+    memcpy(bodyAddress, bodyAddress, 6);
     // Выбираем режим WiFi
     WiFi.mode(WIFI_STA);
 
@@ -36,7 +36,7 @@ void TransmitterAndReceiver::init(uint8_t bodyAddress[])
     
     // Указываем получателя
     esp_now_peer_info_t peerInfo;
-    memcpy(peerInfo.peer_addr, TransmitterAndReceiver::bodyAddress, 6);
+    memcpy(peerInfo.peer_addr, bodyAddress, 6);
     peerInfo.channel = 0;  
     peerInfo.encrypt = false;
     if (esp_now_add_peer(&peerInfo) != ESP_OK){
@@ -64,17 +64,17 @@ void TransmitterAndReceiver::setMenu(Menu* menu)
 
 void TransmitterAndReceiver::sendData()
 {
-    BodyTransmitData bodyData = TransmitterAndReceiver::joystickControl->getJoystickControlTransmitData();
+    BodyTransmitData bodyData = joystickControl->getJoystickControlTransmitData();
 
-    bodyData.speed = TransmitterAndReceiver::buttonControl->getSpeed();
-    bodyData.direction = TransmitterAndReceiver::buttonControl->getDirection();
-    bodyData.soundBip = TransmitterAndReceiver::buttonControl->getSoundBip();
-    bodyData.soundMusic = TransmitterAndReceiver::buttonControl->getSoundMusic();
-    bodyData.motorEnable = TransmitterAndReceiver::buttonControl->getMotorEnable();
-    bodyData.calibrationId = TransmitterAndReceiver::menu->getCalibrationId();
-    bodyData.domeLightMode = TransmitterAndReceiver::buttonControl->getDomeLightMode();
+    bodyData.speed = buttonControl->getSpeed();
+    bodyData.direction = buttonControl->getDirection();
+    bodyData.soundBip = buttonControl->getSoundBip();
+    bodyData.soundMusic = buttonControl->getSoundMusic();
+    bodyData.motorEnable = buttonControl->getMotorEnable();
+    bodyData.calibrationId = menu->getCalibrationId();
+    bodyData.domeLightMode = buttonControl->getDomeLightMode();
 
-    esp_err_t result = esp_now_send(TransmitterAndReceiver::bodyAddress, (uint8_t *) &bodyData, sizeof(bodyData));
+    esp_err_t result = esp_now_send(bodyAddress, (uint8_t *) &bodyData, sizeof(bodyData));
 
     if (result == ESP_OK) {
         Serial.println("Sent with success");
@@ -83,6 +83,6 @@ void TransmitterAndReceiver::sendData()
         Serial.println("Error sending the data");
     }
 
-    TransmitterAndReceiver::menu->setBodyBattery(domeData.bodyBattery);
-    TransmitterAndReceiver::menu->setDomeBattery(domeData.domeBattery);
+    menu->setBodyBattery(domeData.bodyBattery);
+    menu->setDomeBattery(domeData.domeBattery);
 }

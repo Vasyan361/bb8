@@ -2,52 +2,52 @@
 
 void JoystickControl::init()
 {
-    JoystickControl::readConfigFromEeprom();
-    // Serial.print("minX "); Serial.println(JoystickControl::joystcksConfigs[2].minX);
-    // Serial.print("centerX "); Serial.println(JoystickControl::joystcksConfigs[2].centerX);
-    // Serial.print("maxX "); Serial.println(JoystickControl::joystcksConfigs[2].maxX);
+    readConfigFromEeprom();
+    // Serial.print("minX "); Serial.println(joystcksConfigs[2].minX);
+    // Serial.print("centerX "); Serial.println(joystcksConfigs[2].centerX);
+    // Serial.print("maxX "); Serial.println(joystcksConfigs[2].maxX);
     
-    // Serial.print("minY "); Serial.println(JoystickControl::joystcksConfigs[2].minY);
-    // Serial.print("centerY "); Serial.println(JoystickControl::joystcksConfigs[2].centerY);
-    // Serial.print("maxY "); Serial.println(JoystickControl::joystcksConfigs[2].maxY);
+    // Serial.print("minY "); Serial.println(joystcksConfigs[2].minY);
+    // Serial.print("centerY "); Serial.println(joystcksConfigs[2].centerY);
+    // Serial.print("maxY "); Serial.println(joystcksConfigs[2].maxY);
 }
 
 void JoystickControl::setSelectedJoystick(int selectedJoystick)
 {
-    JoystickControl::selectedJoystick = selectedJoystick;
+    selectedJoystick = selectedJoystick;
 }
 
 Joystick* JoystickControl::getSelectedJoystick()
 {
-    return &JoystickControl::joysticks[JoystickControl::selectedJoystick];
+    return &joysticks[selectedJoystick];
 }
 
 void JoystickControl::updateSelectedJoystickCenter()
 {
-    JoystickControl::joystcksConfigs[JoystickControl::selectedJoystick].centerX = JoystickControl::getSelectedJoystick()->getXValue();
-    JoystickControl::joystcksConfigs[JoystickControl::selectedJoystick].centerY = JoystickControl::getSelectedJoystick()->getYValue();
+    joystcksConfigs[selectedJoystick].centerX = getSelectedJoystick()->getXValue();
+    joystcksConfigs[selectedJoystick].centerY = getSelectedJoystick()->getYValue();
 }
 
 void JoystickControl::updateSelectedJoystickMinMax()
 {
-    JoystickControl::joystcksConfigs[JoystickControl::selectedJoystick].minX = JoystickControl::getSelectedJoystick()->getMinX();
-    JoystickControl::joystcksConfigs[JoystickControl::selectedJoystick].maxX = JoystickControl::getSelectedJoystick()->getMaxX();
+    joystcksConfigs[selectedJoystick].minX = getSelectedJoystick()->getMinX();
+    joystcksConfigs[selectedJoystick].maxX = getSelectedJoystick()->getMaxX();
 
-    JoystickControl::joystcksConfigs[JoystickControl::selectedJoystick].minY = JoystickControl::getSelectedJoystick()->getMinY();
-    JoystickControl::joystcksConfigs[JoystickControl::selectedJoystick].maxY = JoystickControl::getSelectedJoystick()->getMaxY();
+    joystcksConfigs[selectedJoystick].minY = getSelectedJoystick()->getMinY();
+    joystcksConfigs[selectedJoystick].maxY = getSelectedJoystick()->getMaxY();
 }
 
 void JoystickControl::saveJoystickConfig()
 {
-    // Serial.print("minX "); Serial.println(JoystickControl::joystcksConfigs[JoystickControl::selectedJoystick].minX);
-    // Serial.print("centerX "); Serial.println(JoystickControl::joystcksConfigs[JoystickControl::selectedJoystick].centerX);
-    // Serial.print("maxX "); Serial.println(JoystickControl::joystcksConfigs[JoystickControl::selectedJoystick].maxX);
+    // Serial.print("minX "); Serial.println(joystcksConfigs[selectedJoystick].minX);
+    // Serial.print("centerX "); Serial.println(joystcksConfigs[selectedJoystick].centerX);
+    // Serial.print("maxX "); Serial.println(joystcksConfigs[selectedJoystick].maxX);
     
-    // Serial.print("minY "); Serial.println(JoystickControl::joystcksConfigs[JoystickControl::selectedJoystick].minY);
-    // Serial.print("centerY "); Serial.println(JoystickControl::joystcksConfigs[JoystickControl::selectedJoystick].centerY);
-    // Serial.print("maxY "); Serial.println(JoystickControl::joystcksConfigs[JoystickControl::selectedJoystick].maxY);
-    JoystickControl::joysticks[JoystickControl::selectedJoystick].setConfig(JoystickControl::joystcksConfigs[JoystickControl::selectedJoystick]);
-    EEPROM.put(CONFIG_ADDRESS, JoystickControl::joystcksConfigs);
+    // Serial.print("minY "); Serial.println(joystcksConfigs[selectedJoystick].minY);
+    // Serial.print("centerY "); Serial.println(joystcksConfigs[selectedJoystick].centerY);
+    // Serial.print("maxY "); Serial.println(joystcksConfigs[selectedJoystick].maxY);
+    joysticks[selectedJoystick].setConfig(joystcksConfigs[selectedJoystick]);
+    EEPROM.put(CONFIG_ADDRESS, joystcksConfigs);
     EEPROM.commit();
 }
 
@@ -58,32 +58,32 @@ void JoystickControl::readConfigFromEeprom()
         for (int i = 0; i < 3; i++)
         {
             joystckConfig initJoystckConfig;
-            JoystickControl::joystcksConfigs[i] = initJoystckConfig;
+            joystcksConfigs[i] = initJoystckConfig;
         }
 
-        EEPROM.put(CONFIG_ADDRESS, JoystickControl::joystcksConfigs);
+        EEPROM.put(CONFIG_ADDRESS, joystcksConfigs);
         EEPROM.write(INIT_ADDRESS, 'w');
         EEPROM.commit();
     } else {
-        EEPROM.get(CONFIG_ADDRESS, JoystickControl::joystcksConfigs);
+        EEPROM.get(CONFIG_ADDRESS, joystcksConfigs);
     }
 
     for (int i = 0; i < 3; i++)
     {
-        JoystickControl::joysticks[i].setConfig(JoystickControl::joystcksConfigs[i]);
+        joysticks[i].setConfig(joystcksConfigs[i]);
     }
 }
 
 BodyTransmitData JoystickControl::getJoystickControlTransmitData()
 {
     BodyTransmitData data;
-    data.TopLeftXJoystick = JoystickControl::joysticks[LEFT_TOP].getXValueForTransmit();
-    data.TopLeftYJoystick = JoystickControl::joysticks[LEFT_TOP].getYValueForTransmit();
-    data.TopRightXJoystick = JoystickControl::joysticks[RIGHT_TOP].getXValueForTransmit();
-    data.TopRightYJoystick = JoystickControl::joysticks[RIGHT_TOP].getYValueForTransmit();
+    data.TopLeftXJoystick = joysticks[LEFT_TOP].getXValueForTransmit();
+    data.TopLeftYJoystick = joysticks[LEFT_TOP].getYValueForTransmit();
+    data.TopRightXJoystick = joysticks[RIGHT_TOP].getXValueForTransmit();
+    data.TopRightYJoystick = joysticks[RIGHT_TOP].getYValueForTransmit();
 
-    data.BottomLeftXJoystick = JoystickControl::joysticks[LEFT_BOTTOM].getXValueForTransmit();
-    data.BottomRightXJoystick = JoystickControl::joysticks[RIGHT_BOTTOM].getXValueForTransmit();
+    data.BottomLeftXJoystick = joysticks[LEFT_BOTTOM].getXValueForTransmit();
+    data.BottomRightXJoystick = joysticks[RIGHT_BOTTOM].getXValueForTransmit();
 
     return data;
 }

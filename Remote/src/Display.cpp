@@ -10,11 +10,11 @@ void Display::init()
 
     prepareForPrint();
 
-    Display::display.println(F("====================="));
-    Display::display.println(F("     Joe's Drive"));
-    Display::display.println(F("====================="));
+    display.println(F("====================="));
+    display.println(F("     Joe's Drive"));
+    display.println(F("====================="));
 
-    Display::display.display();
+    display.display();
 
     Serial.println("Ready");
 
@@ -23,59 +23,59 @@ void Display::init()
 
 void Display::setPointer(int pointer)
 {
-    Display::pointer = pointer;
+    pointer = pointer;
 }
 
 void Display::prepareForPrint()
 {
-    Display::display.clearDisplay();
-    Display::display.setCursor(0,0); 
+    display.clearDisplay();
+    display.setCursor(0,0); 
 
-    Display::display.setTextSize(1);
-    Display::display.setTextColor(SSD1306_WHITE);
+    display.setTextSize(1);
+    display.setTextColor(SSD1306_WHITE);
 }
 
 void Display::printPointer()
 {
-    Display::printPointer(0);
+    printPointer(0);
 }
 
 void Display::printPointer(int alignment)
 {
-    Display::display.setCursor(0, 8 * (Display::pointer + alignment));
-    Display::display.print(">");
+    display.setCursor(0, 8 * (pointer + alignment));
+    display.print(">");
 }
 
 void Display::infoScreen(int speed, int direction, float bodyBattery, float domeBattery)
 {
-    Display::prepareForPrint();
+    prepareForPrint();
 
     // TODO:: реализовать логику
-    Display::display.print(Display::speedNameMap[speed]); Display::display.println(Display::directionNameMap[direction]);
-    Display::display.println(F(""));
-    Display::display.print("Body: ");
+    display.print(speedNameMap[speed]); display.println(directionNameMap[direction]);
+    display.println(F(""));
+    display.print("Body: ");
     if (bodyBattery > 0) {
-        Display::display.print(bodyBattery); Display::display.println("V");
+        display.print(bodyBattery); display.println("V");
     } else {
-        Display::display.println("dissconnected");
+        display.println("dissconnected");
     }
 
-    Display::display.println(F(""));
-    Display::display.print("Dome: ");
+    display.println(F(""));
+    display.print("Dome: ");
     if (domeBattery > 0) {
-        Display::display.print(domeBattery); Display::display.println("V");
+        display.print(domeBattery); display.println("V");
     } else {
-        Display::display.println("dissconnected");
+        display.println("dissconnected");
     }
 
-    Display::display.display();
+    display.display();
 }
 
 void Display::menuScreen()
 {
-    Display::prepareForPrint();
+    prepareForPrint();
 
-    Display::display.print(F(
+    display.print(F(
         "      Main meny\n"
         "=====================\n"
         " Reverse Dome\n"
@@ -84,38 +84,38 @@ void Display::menuScreen()
         " Joystick calibration\n"
     ));
 
-    Display::printPointer(2);
+    printPointer(2);
 
-    Display::display.display();
+    display.display();
 }
 
 void Display::domeReverseScreen()
 {
-    Display::prepareForPrint();
+    prepareForPrint();
 
-    Display::display.print(F(
+    display.print(F(
         " Reverse Dome\n"
     ));
 
-    Display::display.display();
+    display.display();
 }
 
 void Display::domeConfigScreen()
 {
-    Display::prepareForPrint();
+    prepareForPrint();
 
-    Display::display.print(F(
+    display.print(F(
         " Dome Config\n"
     ));
 
-    Display::display.display();
+    display.display();
 }
 
 void Display::bodyConfigScreen()
 {
-    Display::prepareForPrint();
+    prepareForPrint();
 
-    Display::display.print(F(
+    display.print(F(
         "Body Configuration\n"
         "=====================\n"
         "Adjust dome tilt\n"
@@ -125,14 +125,14 @@ void Display::bodyConfigScreen()
         "Then press 'Ok"
     ));
 
-    Display::display.display();
+    display.display();
 }
 
 void Display::joystickConfigScreen()
 {
-    Display::prepareForPrint();
+    prepareForPrint();
 
-    Display::display.print(F(
+    display.print(F(
         "Joystick calibration\n"
         "   select joystick\n"
         "=====================\n"
@@ -142,67 +142,67 @@ void Display::joystickConfigScreen()
         " Bottom right\n"
     ));
 
-    Display::printPointer(3);
+    printPointer(3);
 
-    Display::display.display();
+    display.display();
 }
 
 void Display::joystickCalibrationStep1Screen(char *joystickName, int valX, int valY)
 {
-    Display::prepareForPrint();
+    prepareForPrint();
 
-    Display::display.println(F("  Center calibration"));
-    Display::display.println(joystickName);
-    Display::display.print(F(
+    display.println(F("  Center calibration"));
+    display.println(joystickName);
+    display.print(F(
         "=====================\n"
         "  Release joystick\n"
     ));
-    Display::display.print(F("X center: ")); Display::display.println(valX);
-    Display::display.print(F("Y center: ")); Display::display.println(valY);
-    Display::display.print(F(
+    display.print(F("X center: ")); display.println(valX);
+    display.print(F("Y center: ")); display.println(valY);
+    display.print(F(
         "\n"
         "Press OK to save\n"
     ));
 
-    Display::display.display();
+    display.display();
 }
 void Display::joystickCalibrationStep2Screen(char *joystickName, int minX, int maxX, int minY, int maxY)
 {
-    Display::prepareForPrint();
+    prepareForPrint();
 
-    Display::display.println(F("  min/max calibration"));
-    Display::display.println(joystickName);
-    Display::display.print(F(
+    display.println(F("  min/max calibration"));
+    display.println(joystickName);
+    display.print(F(
         "=====================\n"
         "  Rotate joystick\n"
     ));
-    Display::display.print(F("X min:")); Display::display.print(minX); Display::display.print(F(" X max:")); Display::display.println(maxX);
-    Display::display.print(F("Y min:")); Display::display.print(minY); Display::display.print(F(" Y max:")); Display::display.println(maxY);
-    Display::display.print(F(
+    display.print(F("X min:")); display.print(minX); display.print(F(" X max:")); display.println(maxX);
+    display.print(F("Y min:")); display.print(minY); display.print(F(" Y max:")); display.println(maxY);
+    display.print(F(
         "\n"
         "Press OK to save\n"
     ));
 
-    Display::display.display();
+    display.display();
 }
 
 void Display::joystickCalibrationStep3Screen()
 {
-    Display::prepareForPrint();
+    prepareForPrint();
 
-    Display::display.print(F(
+    display.print(F(
         "Config saved!!\n"
         "=====================\n"
     ));
 
-    Display::display.display();
+    display.display();
 }
 
 void Display::bodyConfigStep1Screen()
 {
-    Display::prepareForPrint();
+    prepareForPrint();
 
-    Display::display.print(F(
+    display.print(F(
         "Body Configuration\n"
         "=====================\n"
         "Dome tilt offset\n"
@@ -212,14 +212,14 @@ void Display::bodyConfigStep1Screen()
         "Press 'Ok"
     ));
 
-    Display::display.display();
+    display.display();
 }
 
 void Display::bodyConfigStep2Screen()
 {
-    Display::prepareForPrint();
+    prepareForPrint();
 
-    Display::display.print(F(
+    display.print(F(
         "Body Configuration\n"
         "=====================\n"
         "Adjust Side to Side\n"
@@ -229,14 +229,14 @@ void Display::bodyConfigStep2Screen()
         "Then press 'Ok"
     ));
 
-    Display::display.display();
+    display.display();
 }
 
 void Display::bodyConfigStep3Screen()
 {
-    Display::prepareForPrint();
+    prepareForPrint();
 
-    Display::display.print(F(
+    display.print(F(
         "Body Configuration\n"
         "=====================\n"
         "Body Calibration\n"
@@ -245,5 +245,5 @@ void Display::bodyConfigStep3Screen()
         "Press 'Ok"
     ));
 
-    Display::display.display();
+    display.display();
 }
