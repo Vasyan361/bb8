@@ -10,5 +10,4 @@ class Receiver
         void init();
         int16_t getDomeLightMode();
         float getBodyBattery();
-    private:
 };

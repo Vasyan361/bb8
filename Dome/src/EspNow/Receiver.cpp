@@ -11,9 +11,14 @@ BodyReceiveData bodyData;
 void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
     memcpy(&bodyData, incomingData, sizeof(bodyData));
 
-    // Serial.print(bodyData.psi); Serial.print(", ");
-    // Serial.print(bodyData.domeLightMode); Serial.print(", ");
-    // Serial.println(bodyData.bodyBattery);
+    #ifdef DEBUG
+    Serial.printf(
+        "psi: %d, domeLightMode: %d, bodyBattery: %d\n",
+        bodyData.psi,
+        bodyData.domeLightMode,
+        bodyData.bodyBattery
+    );
+	#endif
 }
 
 void Receiver::init()

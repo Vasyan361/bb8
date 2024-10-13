@@ -2,7 +2,9 @@
 
 void DomeLogic::init(uint8_t remoteAddress[6])
 {
+	#ifdef DEBUG
     Serial.begin(115200);
+	#endif
 
     receiver.init();
     transmitter.init(remoteAddress);

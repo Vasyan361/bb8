@@ -5,3 +5,5 @@
 #define EYE_PIN 16
 
 #define BATTERY_PIN 32
+
+// #define DEBUG
