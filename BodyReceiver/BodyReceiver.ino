@@ -2,6 +2,8 @@
 #include <WiFi.h>
 #include <EasyTransfer.h>
 
+// #define DEBUG
+
 uint8_t domeAddress[] = {0x40, 0x22, 0xD8, 0x03, 0xBA, 0x68};
 
 typedef struct BodyTransmitData {
@@ -40,24 +42,39 @@ uint32_t timer;
 void OnDataReceive(const uint8_t * mac, const uint8_t *incomingData, int len) {
     memcpy(&bodyData, incomingData, sizeof(bodyData));
     sendToBodyData.sendData();
-    // Serial.print(bodyData.TopLeftXJoystick); Serial.print(", ");
-    // Serial.print(bodyData.TopLeftYJoystick); Serial.print(", ");
-    // Serial.print(bodyData.TopRightXJoystick); Serial.print(", ");
-    // Serial.print(bodyData.TopRightYJoystick); Serial.print(", ");
-    // Serial.print(bodyData.BottomLeftXJoystick); Serial.print(", ");
-    // Serial.print(bodyData.BottomRightXJoystick); Serial.print(", ");
-    // Serial.print(bodyData.speed); Serial.print(", ");
-    // Serial.print(bodyData.direction); Serial.print(", ");
-    // Serial.print(bodyData.soundBip); Serial.print(", ");
-    // Serial.print(bodyData.soundMusic); Serial.print(", ");
-    // Serial.print(bodyData.calibrationId); Serial.print(", ");
-    // Serial.print(bodyData.motorEnable); Serial.print(", ");
-    // Serial.println(bodyData.domeLightMode);
-    
+
+    #ifdef DEBUG
+    Serial.printf(
+        "Receive from remote: %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, \n",
+        bodyData.TopLeftXJoystick,
+        bodyData.TopLeftYJoystick,
+        bodyData.TopRightXJoystick,
+        bodyData.TopRightYJoystick,
+        bodyData.BottomLeftXJoystick,
+        bodyData.BottomRightXJoystick,
+        bodyData.speed,
+        bodyData.direction,
+        bodyData.soundBip,
+        bodyData.soundMusic,
+        bodyData.calibrationId,
+        bodyData.motorEnable,
+        bodyData.domeLightMode
+    );
+    #endif
+}
+
+void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
+    #ifdef DEBUG
+    Serial.print("\r\nLast Packet Send Status:\t");
+    Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+	#endif
 }
  
 void setup() {
+    #ifdef DEBUG
     Serial.begin(115200);
+    #endif
+
     Serial2.begin(57600);
     
     WiFi.mode(WIFI_STA);
@@ -65,16 +82,17 @@ void setup() {
         return;
     }
 
-    // Регистрируем отправку сообщения
     esp_now_register_send_cb(OnDataSent);
     
-    // Указываем получателя
     esp_now_peer_info_t peerInfo = {};
     memcpy(peerInfo.peer_addr, domeAddress, 6);
     peerInfo.channel = 0;  
     peerInfo.encrypt = false;
     if (esp_now_add_peer(&peerInfo) != ESP_OK){
+        #ifdef DEBUG
         Serial.println("Failed to add peer");
+        #endif
+
         return;
     }
 
@@ -86,22 +104,19 @@ void setup() {
 
 void loop() {
     if(receiveFromBodyData.receiveData()){
-        // Serial.print(bodyReceiveData.psi); Serial.print(", ");
-        // Serial.print(bodyReceiveData.domeLightMode); Serial.print(", ");
-        // Serial.println(bodyReceiveData.bodyBattery);
+        #ifdef DEBUG
+        Serial.printf(
+            "Receive from body psi: %d, domeLightMode: %d, bodyBattery: %d\n",
+            bodyReceiveData.psi,
+            bodyReceiveData.domeLightMode,
+            bodyReceiveData.bodyBattery
+        );
+        #endif
 
         esp_err_t result = esp_now_send(domeAddress, (uint8_t *) &bodyReceiveData, sizeof(bodyReceiveData));
 
-        // if (result == ESP_OK) {
-        //     Serial.println("Sent with success");
-        // }
-        // else {
-        //     Serial.println("Error sending the data");
-        // }
+        #ifdef DEBUG
+        Serial.println(result == ESP_OK ? "Sent with success" : "Error sending the data");
+        #endif
     }
-}
-
-void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
-    Serial.print("\r\nLast Packet Send Status:\t");
-    Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
 }
